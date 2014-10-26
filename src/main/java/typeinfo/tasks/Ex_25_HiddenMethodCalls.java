@@ -1,4 +1,4 @@
-package typeinfo;
+package typeinfo.tasks;
 
 import java.lang.reflect.Method;
 

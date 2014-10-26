@@ -23,6 +23,7 @@ class Toy {
 }
 
 class FancyToy extends Toy implements HasBatteries, Waterproof, Shoots, Playable {
+
     FancyToy() {
         super(1);
     }
@@ -31,8 +32,7 @@ class FancyToy extends Toy implements HasBatteries, Waterproof, Shoots, Playable
 public class ToyTest {
     @SuppressWarnings("rawtypes")
     static void printInfo(Class cc) {
-        System.out.println("Class name: " + cc.getName() + " is interface? ["
-                + cc.isInterface() + "]");
+        System.out.println("Class name: " + cc.getName() + " is interface? [" + cc.isInterface() + "]");
         System.out.println("Simple name: " + cc.getSimpleName());
         System.out.println("Canonical name : " + cc.getCanonicalName());
         System.out.println();
