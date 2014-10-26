@@ -9,41 +9,41 @@ import java.lang.reflect.Constructor;
 
 class SuperToy {
 
-	int IQ;
+    int IQ;
 
-	public SuperToy(int inteligiance) {
-		IQ = inteligiance;
-	}
+    public SuperToy(int inteligiance) {
+        IQ = inteligiance;
+    }
 
-	@Override
-	public String toString() {
-		return "I'm super toy, I'm smarter than you!";
-	}
+    @Override
+    public String toString() {
+        return "I'm super toy, I'm smarter than you!";
+    }
 
 }
 
 public class Ex_19_ToyTest {
 
-	public static SuperToy makeToy(String toyName, int IQ) {
-		try {
-			Class<?> tClass = Class.forName(toyName);
-			for (Constructor<?> ctor : tClass.getConstructors()) {
-				
-				// Look for a constructor with a single parameter:
-				Class<?>[] params = ctor.getParameterTypes();
-				
-				if (params.length == 1)
-					if (params[0] == int.class)
-						return (SuperToy) ctor
-								.newInstance(new Object[] { Integer.valueOf(IQ) });
-			}
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-		return null;
-	}
+    public static SuperToy makeToy(String toyName, int IQ) {
+        try {
+            Class<?> tClass = Class.forName(toyName);
+            for (Constructor<?> ctor : tClass.getConstructors()) {
 
-	public static void main(String[] args) {
-		System.out.println(makeToy("typeinfo.reflection.SuperToy", 150));
-	}
+                // Look for a constructor with a single parameter:
+                Class<?>[] params = ctor.getParameterTypes();
+
+                if (params.length == 1)
+                    if (params[0] == int.class)
+                        return (SuperToy) ctor
+                                .newInstance(new Object[]{Integer.valueOf(IQ)});
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(makeToy("typeinfo.reflection.SuperToy", 150));
+    }
 }

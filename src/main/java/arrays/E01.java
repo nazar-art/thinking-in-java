@@ -9,32 +9,32 @@ package arrays;
  */
 
 class BerylliumSphere {
-	private static long counter;
-	private final long id = counter++;
+    private static long counter;
+    private final long id = counter++;
 
-	public String toString() {
-		return "Sphere " + id;
-	}
+    public String toString() {
+        return "Sphere " + id;
+    }
 }
 
 public class E01 {
 
-	private static void call(BerylliumSphere[] berylliumSphere) {
-		StringBuilder builder = new StringBuilder(1024);
-		for (int i = 0; i < berylliumSphere.length; i++) {
-			builder.append(berylliumSphere[i] + " ");
-		}
-		builder.delete(berylliumSphere.length - 1, berylliumSphere.length);
-		System.out.println(builder);
-	}
+    private static void call(BerylliumSphere[] berylliumSphere) {
+        StringBuilder builder = new StringBuilder(1024);
+        for (int i = 0; i < berylliumSphere.length; i++) {
+            builder.append(berylliumSphere[i] + " ");
+        }
+        builder.delete(berylliumSphere.length - 1, berylliumSphere.length);
+        System.out.println(builder);
+    }
 
-	public static void main(String[] args) {
-		// Dynamic aggregate initialization:
-		call(new BerylliumSphere[] { new BerylliumSphere(),
-				new BerylliumSphere(), new BerylliumSphere() });
+    public static void main(String[] args) {
+        // Dynamic aggregate initialization:
+        call(new BerylliumSphere[]{new BerylliumSphere(),
+                new BerylliumSphere(), new BerylliumSphere()});
 
-		BerylliumSphere[] sphere = { new BerylliumSphere(),
-				new BerylliumSphere(), new BerylliumSphere() };
-		call(sphere);
-	}
+        BerylliumSphere[] sphere = {new BerylliumSphere(),
+                new BerylliumSphere(), new BerylliumSphere()};
+        call(sphere);
+    }
 }

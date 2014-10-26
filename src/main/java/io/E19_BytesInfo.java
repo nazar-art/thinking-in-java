@@ -7,22 +7,23 @@ package io;
 
 import java.io.*;
 import java.util.*;
+
 import net.mindview.util.*;
 
 public class E19_BytesInfo {
-	
-	public static void main(String[] args) throws IOException {
-		
-		Map<Byte, Integer> bytesStat = new HashMap<Byte, Integer>();
-		
-		for (Byte bt : BinaryFile.read("./bin/io/E19_BytesInfo.class")) {
-			Integer freq = bytesStat.get(bt);
-			bytesStat.put(bt, freq == null ? 1 : freq + 1);
-		}
-		
-		List<Byte> keys = new ArrayList<Byte>(bytesStat.keySet());
-		Collections.sort(keys);
-		for (Byte key : keys)
-			System.out.println(key + " => " + bytesStat.get(key));
-	}
+
+    public static void main(String[] args) throws IOException {
+
+        Map<Byte, Integer> bytesStat = new HashMap<Byte, Integer>();
+
+        for (Byte bt : BinaryFile.read("./bin/io/E19_BytesInfo.class")) {
+            Integer freq = bytesStat.get(bt);
+            bytesStat.put(bt, freq == null ? 1 : freq + 1);
+        }
+
+        List<Byte> keys = new ArrayList<Byte>(bytesStat.keySet());
+        Collections.sort(keys);
+        for (Byte key : keys)
+            System.out.println(key + " => " + bytesStat.get(key));
+    }
 }

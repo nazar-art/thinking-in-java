@@ -12,37 +12,37 @@ import java.util.concurrent.TimeUnit;
 
 class SleepingTask2 implements Runnable {
 
-	private static Random random = new Random();
+    private static Random random = new Random();
 
-	@Override
-	public void run() {
-		int duration = random.nextInt(10) + 1;
-		try {
-			TimeUnit.SECONDS.sleep(duration);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		System.out.printf("sleeping time was %d sec%n", duration);
-	}
+    @Override
+    public void run() {
+        int duration = random.nextInt(10) + 1;
+        try {
+            TimeUnit.SECONDS.sleep(duration);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.printf("sleeping time was %d sec%n", duration);
+    }
 
 }
 
 public class E06_Sleeping {
 
-	public static void main(String[] args) {
-		
-		ExecutorService executor = Executors.newCachedThreadPool();
-		
-		if (args.length != 1) {
-			System.err.println("Provide the quantity of tasks to run");
-			return;
-		}
-		
-		for (int i = 0; i < Integer.parseInt(args[0]); i++) {
-			executor.execute(new SleepingTask2());
-		}
-		
-		Thread.yield();
-		executor.shutdown();
-	}
+    public static void main(String[] args) {
+
+        ExecutorService executor = Executors.newCachedThreadPool();
+
+        if (args.length != 1) {
+            System.err.println("Provide the quantity of tasks to run");
+            return;
+        }
+
+        for (int i = 0; i < Integer.parseInt(args[0]); i++) {
+            executor.execute(new SleepingTask2());
+        }
+
+        Thread.yield();
+        executor.shutdown();
+    }
 }

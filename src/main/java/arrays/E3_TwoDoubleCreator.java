@@ -13,49 +13,49 @@ import java.util.Locale;
 
 class ArrayDoubleCreator {
 
-	public double[][] twoDDoubleArray(int xLen, int yLen,
-			double valStart, double valEnd) {
+    public double[][] twoDDoubleArray(int xLen, int yLen,
+                                      double valStart, double valEnd) {
 
-		double[][] array = new double[xLen][yLen];
-		double increment = (valEnd - valStart) / (xLen * yLen);
-		double val = valStart;
+        double[][] array = new double[xLen][yLen];
+        double increment = (valEnd - valStart) / (xLen * yLen);
+        double val = valStart;
 
-		for (int i = 0; i < array.length; i++) {
-			for (int j = 0; j < array[i].length; j++) {
-				array[i][j] = val;
-				val += increment;
-			}
-		}
-		return array;
-	}
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                array[i][j] = val;
+                val += increment;
+            }
+        }
+        return array;
+    }
 
-	public void printArray(double[][] array) {
-		for (int i = 0; i < array.length; i++) {
+    public void printArray(double[][] array) {
+        for (int i = 0; i < array.length; i++) {
 
-			for (int j = 0; j < array[i].length; j++) {
-				System.out.printf(Locale.US, "%.2f ", array[i][j]);
-			}
+            for (int j = 0; j < array[i].length; j++) {
+                System.out.printf(Locale.US, "%.2f ", array[i][j]);
+            }
 
-			System.out.println();
-		}
-	}
+            System.out.println();
+        }
+    }
 }
 
 public class E3_TwoDoubleCreator {
 
-	public static void main(String[] args) {
-		ArrayDoubleCreator creator = new ArrayDoubleCreator();
+    public static void main(String[] args) {
+        ArrayDoubleCreator creator = new ArrayDoubleCreator();
 
-		double[][] twoD = creator.twoDDoubleArray(4, 6, 47.0, 99.0);
-		creator.printArray(twoD);
-		System.out.println("**********************");
-		
-		double[][] twoD2 = creator.twoDDoubleArray(2, 2, 47.0, 99.0);
-		creator.printArray(twoD2);
-		System.out.println("**********************");
-		
-		double[][] twoD3 = creator.twoDDoubleArray(9, 5, 47.0, 99.0);
-		creator.printArray(twoD3);
+        double[][] twoD = creator.twoDDoubleArray(4, 6, 47.0, 99.0);
+        creator.printArray(twoD);
+        System.out.println("**********************");
 
-	}
+        double[][] twoD2 = creator.twoDDoubleArray(2, 2, 47.0, 99.0);
+        creator.printArray(twoD2);
+        System.out.println("**********************");
+
+        double[][] twoD3 = creator.twoDDoubleArray(9, 5, 47.0, 99.0);
+        creator.printArray(twoD3);
+
+    }
 }

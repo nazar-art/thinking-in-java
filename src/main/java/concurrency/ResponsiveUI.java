@@ -5,37 +5,37 @@ package concurrency;
 // {RunByHand}
 
 class UnresponsiveUI {
-	
-	private volatile double d = 1;
 
-	public UnresponsiveUI() throws Exception {
-		while (d > 0)
-			d = d + (Math.PI + Math.E) / d;
-		System.in.read(); // Never gets here
-	}
+    private volatile double d = 1;
+
+    public UnresponsiveUI() throws Exception {
+        while (d > 0)
+            d = d + (Math.PI + Math.E) / d;
+        System.in.read(); // Never gets here
+    }
 }
 
 public class ResponsiveUI extends Thread {
-	
-	private static volatile double d = 1;
 
-	public ResponsiveUI() {
-		setDaemon(true);
-		start();
-	}
+    private static volatile double d = 1;
 
-	public void run() {
-		while (true) {
-			d = d + (Math.PI + Math.E) / d;
-		}
-	}
+    public ResponsiveUI() {
+        setDaemon(true);
+        start();
+    }
 
-	public static void main(String[] args) throws Exception {
-		
-		// ! new UnresponsiveUI(); // Must kill this process
-		System.out.println("start");
-		new ResponsiveUI();
-		System.in.read();
-		System.out.println(d); // Shows progress
-	}
+    public void run() {
+        while (true) {
+            d = d + (Math.PI + Math.E) / d;
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+
+        // ! new UnresponsiveUI(); // Must kill this process
+        System.out.println("start");
+        new ResponsiveUI();
+        System.in.read();
+        System.out.println(d); // Shows progress
+    }
 } // /:~

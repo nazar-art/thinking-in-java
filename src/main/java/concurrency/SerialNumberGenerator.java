@@ -1,9 +1,9 @@
 package concurrency;
 
 public class SerialNumberGenerator {
-	private static volatile int serialNumber = 0;
+    private static volatile int serialNumber = 0;
 
-	public static synchronized int nextSerialNumber() {
-		return serialNumber++; // Not thread-safe
-	}
+    public static synchronized int nextSerialNumber() {
+        return serialNumber++; // Not thread-safe
+    }
 } 

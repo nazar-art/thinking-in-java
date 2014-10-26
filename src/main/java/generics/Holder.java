@@ -1,29 +1,29 @@
 package generics;
 
 public class Holder<T> {
-	private T value;
+    private T value;
 
-	public Holder() {
-	}
+    public Holder() {
+    }
 
-	public Holder(T val) {
-		value = val;
-	}
+    public Holder(T val) {
+        value = val;
+    }
 
-	public void set(T val) {
-		value = val;
-	}
+    public void set(T val) {
+        value = val;
+    }
 
-	public T get() {
-		return value;
-	}
+    public T get() {
+        return value;
+    }
 
-	public boolean equals(Object obj) {
-		return value.equals(obj);
-	}
+    public boolean equals(Object obj) {
+        return value.equals(obj);
+    }
 
 /*	public static void main(String[] args) {
-		Holder<Apple> Apple = new Holder<Apple>(new Apple());
+        Holder<Apple> Apple = new Holder<Apple>(new Apple());
 		Apple d = Apple.get();
 		Apple.set(d);
 		// Holder<Fruit> Fruit = Apple; // Cannot upcast

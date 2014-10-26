@@ -12,19 +12,19 @@ import java.util.prefs.*;
 import static net.mindview.util.Print.*;
 
 public class E33_PreferencesDemo {
-	
-	public static void main(String[] args) throws Exception {
-		
-		Preferences prefs = Preferences.userNodeForPackage(E33_PreferencesDemo.class);
-		String directory = prefs.get("base directory", "Not defined");
-		print("directory: " + directory);
-		
-		@SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in);
-		printnb("Enter a new directory: ");
-		
-		directory = sc.nextLine();
-		prefs.put("base directory", directory);
-		print("\ndirectory: " + directory);
-	}
+
+    public static void main(String[] args) throws Exception {
+
+        Preferences prefs = Preferences.userNodeForPackage(E33_PreferencesDemo.class);
+        String directory = prefs.get("base directory", "Not defined");
+        print("directory: " + directory);
+
+        @SuppressWarnings("resource")
+        Scanner sc = new Scanner(System.in);
+        printnb("Enter a new directory: ");
+
+        directory = sc.nextLine();
+        prefs.put("base directory", directory);
+        print("\ndirectory: " + directory);
+    }
 }

@@ -7,67 +7,67 @@ import java.util.Queue;
 import java.util.Random;
 
 class LittleFish {
-	private static long counter;
-	private final long id = counter++;
+    private static long counter;
+    private final long id = counter++;
 
-	private LittleFish() {
-	}
+    private LittleFish() {
+    }
 
-	@Override
-	public String toString() {
-		return "Littlefish " + id;
-	}
+    @Override
+    public String toString() {
+        return "Littlefish " + id;
+    }
 
-	public static Generator<LittleFish> generator() {
-		return new Generator<LittleFish>() {
+    public static Generator<LittleFish> generator() {
+        return new Generator<LittleFish>() {
 
-			@Override
-			public LittleFish next() {
-				return new LittleFish();
-			}
-		};
-	}
+            @Override
+            public LittleFish next() {
+                return new LittleFish();
+            }
+        };
+    }
 }
 
 class BigFish {
-	private static long counter;
-	private final long id = counter++;
+    private static long counter;
+    private final long id = counter++;
 
-	private BigFish() {
-	}
+    private BigFish() {
+    }
 
-	@Override
-	public String toString() {
-		return "BigFish " + id;
-	}
+    @Override
+    public String toString() {
+        return "BigFish " + id;
+    }
 
-	public static Generator<BigFish> generator() {
-		return new Generator<BigFish>() {
+    public static Generator<BigFish> generator() {
+        return new Generator<BigFish>() {
 
-			@Override
-			public BigFish next() {
-				return new BigFish();
-			}
-		};
-	}
+            @Override
+            public BigFish next() {
+                return new BigFish();
+            }
+        };
+    }
 }
 
 public class Ocean {
-	
-	public static void serve(BigFish bf, LittleFish lf) {
-		System.out.println(bf + " eats " + lf);
-		}
-	
-	public static void main(String[] args) {
-		Random rand = new Random(47);
-		Queue<LittleFish> line = new LinkedList<LittleFish>();
-		Generators.fill(line, LittleFish.generator(), 15);
-		
-		List<BigFish> bigFishes = new ArrayList<BigFish>();
-		Generators.fill(bigFishes, BigFish.generator(), 4);
-		
-		for(LittleFish c : line)
-			serve(bigFishes.get(rand.nextInt(bigFishes.size())), c);
 
-	}
+    public static void serve(BigFish bf, LittleFish lf) {
+        System.out.println(bf + " eats " + lf);
+    }
+
+    public static void main(String[] args) {
+        Random rand = new Random(47);
+        Queue<LittleFish> line = new LinkedList<LittleFish>();
+        Generators.fill(line, LittleFish.generator(), 15);
+
+        List<BigFish> bigFishes = new ArrayList<BigFish>();
+        Generators.fill(bigFishes, BigFish.generator(), 4);
+
+        for (LittleFish c : line)
+            serve(bigFishes.get(rand.nextInt(bigFishes.size())), c);
+
+    }
 }

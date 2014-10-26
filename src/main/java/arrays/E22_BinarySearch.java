@@ -9,12 +9,12 @@ import java.util.Arrays;
 
 public class E22_BinarySearch {
 
-	public static void main(String[] args) {
-		int[] array = {
-				23, 43, 56, 64, 97, 12, 64, 83, 17, 3, 85
-		};
-		
-		System.out.println(Arrays.binarySearch(array, 23));
-	}
+    public static void main(String[] args) {
+        int[] array = {
+                23, 43, 56, 64, 97, 12, 64, 83, 17, 3, 85
+        };
+
+        System.out.println(Arrays.binarySearch(array, 23));
+    }
 
 }

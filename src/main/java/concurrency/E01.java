@@ -16,37 +16,37 @@ import java.util.concurrent.Executors;
 
 class Run implements Runnable {
 
-	private static int taskCount = 0;
+    private static int taskCount = 0;
 
-	private final int id = taskCount++;
+    private final int id = taskCount++;
 
-	public Run() {
-		System.out.println("run instance are created! " + id);
-	}
+    public Run() {
+        System.out.println("run instance are created! " + id);
+    }
 
-	@Override
-	public void run() {
-		System.out.println("Stage 1..., ID = " + id);
-		Thread.yield();
-		System.out.println("Stage 2..., ID = " + id);
-		Thread.yield();
-		System.out.println("Stage 3..., ID = " + id);
-		Thread.yield();
-		System.out.println("Printer ended, ID = " + id);
-	}
+    @Override
+    public void run() {
+        System.out.println("Stage 1..., ID = " + id);
+        Thread.yield();
+        System.out.println("Stage 2..., ID = " + id);
+        Thread.yield();
+        System.out.println("Stage 3..., ID = " + id);
+        Thread.yield();
+        System.out.println("Printer ended, ID = " + id);
+    }
 
 }
 
 public class E01 {
-	public static void main(String[] args) {
-		ExecutorService service = Executors.newCachedThreadPool();
-		service = Executors.newFixedThreadPool(5);
-		service = Executors.newSingleThreadExecutor();
-		
-		for (int i = 0; i <= 5; i++) {
+    public static void main(String[] args) {
+        ExecutorService service = Executors.newCachedThreadPool();
+        service = Executors.newFixedThreadPool(5);
+        service = Executors.newSingleThreadExecutor();
+
+        for (int i = 0; i <= 5; i++) {
 //			new Thread(new Run()).start();
-			service.execute(new Run());
-		}
-		
-	}
+            service.execute(new Run());
+        }
+
+    }
 }

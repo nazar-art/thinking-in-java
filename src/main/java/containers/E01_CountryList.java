@@ -13,18 +13,18 @@ import java.util.Random;
  */
 
 public class E01_CountryList {
-	private static Random rnd = new Random(47);
+    private static Random rnd = new Random(47);
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		List<String> l = new ArrayList<String>(Countries.names(8));
-		Collections.sort(l);
-		System.out.println("sorted: " + l);
-		
-		for (int i = 1; i < 5; i++) {
-			Collections.shuffle(l, rnd);
-			System.out.println("shuffled (" + i + "): " + l);
-		}
-	}
+        List<String> l = new ArrayList<String>(Countries.names(8));
+        Collections.sort(l);
+        System.out.println("sorted: " + l);
+
+        for (int i = 1; i < 5; i++) {
+            Collections.shuffle(l, rnd);
+            System.out.println("shuffled (" + i + "): " + l);
+        }
+    }
 
 }

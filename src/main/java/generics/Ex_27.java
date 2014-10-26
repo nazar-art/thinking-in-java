@@ -9,11 +9,11 @@ import java.util.List;
  */
 
 public class Ex_27 {
-	
-	public static void main(String[] args) {
-		List<? extends Number> nlist = new ArrayList<Integer>();
-		//nlist.add(new Integer(5));
-		nlist.add(null);
-		System.out.println(nlist);
-	}
+
+    public static void main(String[] args) {
+        List<? extends Number> nlist = new ArrayList<Integer>();
+        //nlist.add(new Integer(5));
+        nlist.add(null);
+        System.out.println(nlist);
+    }
 }

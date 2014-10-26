@@ -9,56 +9,56 @@ package exceptions;
  */
 
 class BaseLevelException extends Exception {
-	BaseLevelException(String msg) {
-		super(msg);
-		//System.out.println(msg);
-	}
+    BaseLevelException(String msg) {
+        super(msg);
+        //System.out.println(msg);
+    }
 }
 
 @SuppressWarnings("serial")
 class FirstLevelException extends BaseLevelException {
-	FirstLevelException(String m) {
-		super(m);
-		//System.out.println(m);
-	}
+    FirstLevelException(String m) {
+        super(m);
+        //System.out.println(m);
+    }
 }
 
 @SuppressWarnings("serial")
 class SecondLevelException extends FirstLevelException {
-	SecondLevelException(String s) {
-		super(s);
-		//System.out.println(s);
-	}
+    SecondLevelException(String s) {
+        super(s);
+        //System.out.println(s);
+    }
 }
 
 class A {
 
-	void a() throws BaseLevelException {
-		throw new BaseLevelException("A thrown BaseLevelException");
-	}
+    void a() throws BaseLevelException {
+        throw new BaseLevelException("A thrown BaseLevelException");
+    }
 }
 
 class B extends A {
-	@Override
-	void a() throws FirstLevelException {
-		throw new FirstLevelException("B thrown FirstLevelException");
-	}
+    @Override
+    void a() throws FirstLevelException {
+        throw new FirstLevelException("B thrown FirstLevelException");
+    }
 }
 
 class C extends B {
-	@Override
-	void a() throws SecondLevelException {
-		throw new SecondLevelException("C thrown SecondLevelException");
-	}
+    @Override
+    void a() throws SecondLevelException {
+        throw new SecondLevelException("C thrown SecondLevelException");
+    }
 }
 
 public class Exer_25 {
-	public static void main(String[] args) {
-		A object = new C();
-		try {
-			object.a();
-		} catch (BaseLevelException e) {
-			System.out.println("Caught " + e);
-		}
-	}
+    public static void main(String[] args) {
+        A object = new C();
+        try {
+            object.a();
+        } catch (BaseLevelException e) {
+            System.out.println("Caught " + e);
+        }
+    }
 }

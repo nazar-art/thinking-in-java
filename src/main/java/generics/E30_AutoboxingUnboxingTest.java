@@ -8,10 +8,10 @@ package generics;
 
 public class E30_AutoboxingUnboxingTest {
 
-	public static void main(String[] args) {
-		Holder<Integer> hi = new Holder<>();
-		hi.set(5);
-		int i = hi.get();
-		System.out.println(5 == i);
-	}
+    public static void main(String[] args) {
+        Holder<Integer> hi = new Holder<>();
+        hi.set(5);
+        int i = hi.get();
+        System.out.println(5 == i);
+    }
 }

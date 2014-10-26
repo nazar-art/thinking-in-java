@@ -7,78 +7,79 @@ package concurrency;
 
 import java.util.concurrent.*;
 import java.util.*;
+
 import static net.mindview.util.Print.*;
 
 class Sensor implements Runnable {
-	
-	private static Random rand = new Random(47);
-	private static Count count = new Count();
-	private static List<Sensor> sensors = new ArrayList<Sensor>();
-	private int number;
-	private final int id;
-	private static volatile boolean canceled = false;
 
-	public static void cancel() {
-		canceled = true;
-	}
+    private static Random rand = new Random(47);
+    private static Count count = new Count();
+    private static List<Sensor> sensors = new ArrayList<Sensor>();
+    private int number;
+    private final int id;
+    private static volatile boolean canceled = false;
 
-	public Sensor(int id) {
-		this.id = id;
-		sensors.add(this);
-	}
+    public static void cancel() {
+        canceled = true;
+    }
 
-	public void run() {
-		while (!canceled) {
-			// Simulate a random occurrence of an ionizing event
-			if (rand.nextInt(5) == 0) {
-				synchronized (this) {
-					++number;
-				}
-				count.increment();
-			}
-			try {
-				TimeUnit.MILLISECONDS.sleep(100);
-			} catch (InterruptedException e) {
-				print("sleep interrupted");
-			}
-		}
-	}
+    public Sensor(int id) {
+        this.id = id;
+        sensors.add(this);
+    }
 
-	public synchronized int getValue() {
-		return number;
-	}
+    public void run() {
+        while (!canceled) {
+            // Simulate a random occurrence of an ionizing event
+            if (rand.nextInt(5) == 0) {
+                synchronized (this) {
+                    ++number;
+                }
+                count.increment();
+            }
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e) {
+                print("sleep interrupted");
+            }
+        }
+    }
 
-	public String toString() {
-		return "Sensor " + id + ": " + getValue();
-	}
+    public synchronized int getValue() {
+        return number;
+    }
 
-	public static int getTotalCount() {
-		return count.value();
-	}
+    public String toString() {
+        return "Sensor " + id + ": " + getValue();
+    }
 
-	public static int sumSensors() {
-		int sum = 0;
-		for (Sensor sensor : sensors)
-			sum += sensor.getValue();
-		return sum;
-	}
+    public static int getTotalCount() {
+        return count.value();
+    }
+
+    public static int sumSensors() {
+        int sum = 0;
+        for (Sensor sensor : sensors)
+            sum += sensor.getValue();
+        return sum;
+    }
 }
 
 public class E17_RadiationCounter {
-	public static void main(String[] args) throws Exception {
-		
-		ExecutorService exec = Executors.newCachedThreadPool();
-		
-		for (int i = 0; i < 5; i++)
-			exec.execute(new Sensor(i));
-		TimeUnit.SECONDS.sleep(3);
-		Sensor.cancel();
-		
-		exec.shutdown();
-		
-		if (!exec.awaitTermination(250, TimeUnit.MILLISECONDS))
-			print("Some tasks were not terminated!");
-		print("Total: " + Sensor.getTotalCount());
-		print("Sum of Sensors: " + Sensor.sumSensors());
-	}
+    public static void main(String[] args) throws Exception {
+
+        ExecutorService exec = Executors.newCachedThreadPool();
+
+        for (int i = 0; i < 5; i++)
+            exec.execute(new Sensor(i));
+        TimeUnit.SECONDS.sleep(3);
+        Sensor.cancel();
+
+        exec.shutdown();
+
+        if (!exec.awaitTermination(250, TimeUnit.MILLISECONDS))
+            print("Some tasks were not terminated!");
+        print("Total: " + Sensor.getTotalCount());
+        print("Sum of Sensors: " + Sensor.sumSensors());
+    }
 }

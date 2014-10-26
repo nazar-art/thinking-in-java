@@ -10,55 +10,55 @@ package generics;
  */
 
 interface Top {
-	void a();
+    void a();
 
-	void b();
+    void b();
 }
 
 interface Low {
-	void c();
+    void c();
 
-	void d();
+    void d();
 }
 
 class TopLowImpl implements Top, Low {
 
-	@Override
-	public void c() {
-		System.out.println("Low.c()");
-	}
+    @Override
+    public void c() {
+        System.out.println("Low.c()");
+    }
 
-	@Override
-	public void d() {
-		System.out.println("Low.d()");
-	}
+    @Override
+    public void d() {
+        System.out.println("Low.d()");
+    }
 
-	@Override
-	public void a() {
-		System.out.println("Top.a()");
-	}
+    @Override
+    public void a() {
+        System.out.println("Top.a()");
+    }
 
-	@Override
-	public void b() {
-		System.out.println("Top.b()");
-	}
+    @Override
+    public void b() {
+        System.out.println("Top.b()");
+    }
 }
 
 public class Ex_25_Bounds {
 
-	static <T extends Top> void top(T obj) {
-		obj.a();
-		obj.b();
-	}
+    static <T extends Top> void top(T obj) {
+        obj.a();
+        obj.b();
+    }
 
-	static <T extends Low> void low(T obj) {
-		obj.c();
-		obj.d();
-	}
+    static <T extends Low> void low(T obj) {
+        obj.c();
+        obj.d();
+    }
 
-	public static void main(String[] args) {
-		TopLowImpl topLowImpl = new TopLowImpl();
-		top(topLowImpl);
-		low(topLowImpl);
-	}
+    public static void main(String[] args) {
+        TopLowImpl topLowImpl = new TopLowImpl();
+        top(topLowImpl);
+        low(topLowImpl);
+    }
 }

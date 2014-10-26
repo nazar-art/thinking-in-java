@@ -3,17 +3,17 @@ package concurrency;
 //: concurrency/IntGenerator.java
 
 public abstract class IntGenerator {
-	
-	private volatile boolean canceled = false;
 
-	public abstract int next();
+    private volatile boolean canceled = false;
 
-	// Allow this to be canceled:
-	public void cancel() {
-		canceled = true;
-	}
+    public abstract int next();
 
-	public boolean isCanceled() {
-		return canceled;
-	}
+    // Allow this to be canceled:
+    public void cancel() {
+        canceled = true;
+    }
+
+    public boolean isCanceled() {
+        return canceled;
+    }
 } 

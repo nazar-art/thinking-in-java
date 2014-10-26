@@ -15,53 +15,53 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 class One implements Serializable {
-	String name;
+    String name;
 
-	public One(String name) {
-		this.name = name;
-	}
+    public One(String name) {
+        this.name = name;
+    }
 
-	@Override
-	public String toString() {
-		return name;
-	}
+    @Override
+    public String toString() {
+        return name;
+    }
 }
 
 @SuppressWarnings("serial")
 class Second implements Serializable {
-	One one;
+    One one;
 
-	public Second(One one) {
-		this.one = one;
-	}
+    public Second(One one) {
+        this.one = one;
+    }
 
-	@Override
-	public String toString() {
-		return one.toString();
-	}
+    @Override
+    public String toString() {
+        return one.toString();
+    }
 }
 
 public class E27 {
 
-	public static void main(String[] args) {
-		Second second = new Second(new One("this is one instance ;-) ..."));
-		Second instance = new Second(new One("this is another instance ;-)) ..."));
+    public static void main(String[] args) {
+        Second second = new Second(new One("this is one instance ;-) ..."));
+        Second instance = new Second(new One("this is another instance ;-)) ..."));
 
-		try (ObjectOutputStream out = new ObjectOutputStream(
-				new FileOutputStream(Location.LOC + "E27.data"));) {
-			out.writeObject(second);
-			out.writeObject(instance);
-			System.out.println("Write");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(Location.LOC + "E27.data"));) {
-			System.out.println("Recovering:");
-			System.out.println((Second) in.readObject());
-			System.out.println((Second) in.readObject());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+        try (ObjectOutputStream out = new ObjectOutputStream(
+                new FileOutputStream(Location.LOC + "E27.data"));) {
+            out.writeObject(second);
+            out.writeObject(instance);
+            System.out.println("Write");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(Location.LOC + "E27.data"));) {
+            System.out.println("Recovering:");
+            System.out.println((Second) in.readObject());
+            System.out.println((Second) in.readObject());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

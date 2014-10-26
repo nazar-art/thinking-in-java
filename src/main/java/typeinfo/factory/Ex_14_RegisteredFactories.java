@@ -12,25 +12,25 @@ import java.util.Random;
  */
 
 class Part2 {
-	private static Random random = new Random(47);
-	
-	static List<Class<? extends Part2>> partClasses = Arrays.asList(
-			FuelFilter2.class, AirFilter2.class, CabinAirFilter2.class,
-			OilFilter2.class, FanBelt2.class, PowerSteeringBelt2.class,
-			GeneratorBelt2.class);
+    private static Random random = new Random(47);
 
-	public String toString() {
-		return getClass().getSimpleName();
-	}
-	
-	public static Part2 createRandom() {
-		int n = random.nextInt(partClasses.size());
-		try {
-			return partClasses.get(n).newInstance();
-		} catch (InstantiationException | IllegalAccessException e) {
-			throw new RuntimeException();
-		}
-	}
+    static List<Class<? extends Part2>> partClasses = Arrays.asList(
+            FuelFilter2.class, AirFilter2.class, CabinAirFilter2.class,
+            OilFilter2.class, FanBelt2.class, PowerSteeringBelt2.class,
+            GeneratorBelt2.class);
+
+    public String toString() {
+        return getClass().getSimpleName();
+    }
+
+    public static Part2 createRandom() {
+        int n = random.nextInt(partClasses.size());
+        try {
+            return partClasses.get(n).newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException();
+        }
+    }
 }
 
 class Filter2 extends Part2 {
@@ -61,9 +61,9 @@ class PowerSteeringBelt2 extends Belt2 {
 }
 
 public class Ex_14_RegisteredFactories {
-	public static void main(String[] args) {
-		for (int i = 0; i < 10; i++) {
-			System.out.println(Part2.createRandom());
-		}
-	}
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            System.out.println(Part2.createRandom());
+        }
+    }
 }

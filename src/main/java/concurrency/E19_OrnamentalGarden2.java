@@ -6,66 +6,67 @@ package concurrency;
 
 import java.util.concurrent.*;
 import java.util.*;
+
 import static net.mindview.util.Print.*;
 
 class Entrance2 implements Runnable {
-	
-	private static Count count = new Count();
-	private static List<Entrance2> entrances = new ArrayList<Entrance2>();
-	private int number;
-	private final int id;
 
-	public Entrance2(int id) {
-		this.id = id;
-		entrances.add(this);
-	}
+    private static Count count = new Count();
+    private static List<Entrance2> entrances = new ArrayList<Entrance2>();
+    private int number;
+    private final int id;
 
-	public void run() {
-		for (;;) {
-			synchronized (this) {
-				++number;
-			}
-			print(this + " Total: " + count.increment());
-			try {
-				TimeUnit.MILLISECONDS.sleep(100);
-			} catch (InterruptedException e) {
-				print("Stopping " + this);
-				return;
-			}
-		}
-	}
+    public Entrance2(int id) {
+        this.id = id;
+        entrances.add(this);
+    }
 
-	public synchronized int getValue() {
-		return number;
-	}
+    public void run() {
+        for (; ; ) {
+            synchronized (this) {
+                ++number;
+            }
+            print(this + " Total: " + count.increment());
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e) {
+                print("Stopping " + this);
+                return;
+            }
+        }
+    }
 
-	public String toString() {
-		return "Entrance " + id + ": " + getValue();
-	}
+    public synchronized int getValue() {
+        return number;
+    }
 
-	public static int getTotalCount() {
-		return count.value();
-	}
+    public String toString() {
+        return "Entrance " + id + ": " + getValue();
+    }
 
-	public static int sumEntrances() {
-		int sum = 0;
-		for (Entrance2 entrance : entrances)
-			sum += entrance.getValue();
-		return sum;
-	}
+    public static int getTotalCount() {
+        return count.value();
+    }
+
+    public static int sumEntrances() {
+        int sum = 0;
+        for (Entrance2 entrance : entrances)
+            sum += entrance.getValue();
+        return sum;
+    }
 }
 
 public class E19_OrnamentalGarden2 {
-	public static void main(String[] args) throws Exception {
-		
-		ExecutorService exec = Executors.newCachedThreadPool();
-		for (int i = 0; i < 5; i++)
-			exec.execute(new Entrance2(i));
-		TimeUnit.SECONDS.sleep(3);
-		exec.shutdownNow();
-		if (!exec.awaitTermination(250, TimeUnit.MILLISECONDS))
-			print("Some tasks were not terminated!");
-		print("Total: " + Entrance2.getTotalCount());
-		print("Sum of Entrances: " + Entrance2.sumEntrances());
-	}
+    public static void main(String[] args) throws Exception {
+
+        ExecutorService exec = Executors.newCachedThreadPool();
+        for (int i = 0; i < 5; i++)
+            exec.execute(new Entrance2(i));
+        TimeUnit.SECONDS.sleep(3);
+        exec.shutdownNow();
+        if (!exec.awaitTermination(250, TimeUnit.MILLISECONDS))
+            print("Some tasks were not terminated!");
+        print("Total: " + Entrance2.getTotalCount());
+        print("Sum of Entrances: " + Entrance2.sumEntrances());
+    }
 }

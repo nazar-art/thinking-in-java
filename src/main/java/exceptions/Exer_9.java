@@ -24,18 +24,18 @@ class ExceptThree extends ExceptBase {
 }
 
 class ThrowExcept {
-	public void exceptionsComing() throws ExceptOne, ExceptTwo, ExceptThree {
-		throw new ExceptOne();
-	}
+    public void exceptionsComing() throws ExceptOne, ExceptTwo, ExceptThree {
+        throw new ExceptOne();
+    }
 }
 
 public class Exer_9 {
-	public static void main(String[] args) {
-		ThrowExcept except = new ThrowExcept();
-		try {
-			except.exceptionsComing();
-		} catch (ExceptBase e) {
-			e.printStackTrace();
-		}
-	}
+    public static void main(String[] args) {
+        ThrowExcept except = new ThrowExcept();
+        try {
+            except.exceptionsComing();
+        } catch (ExceptBase e) {
+            e.printStackTrace();
+        }
+    }
 }

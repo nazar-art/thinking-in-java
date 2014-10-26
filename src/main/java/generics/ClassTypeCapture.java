@@ -18,37 +18,37 @@ class House extends Building {
 }
 
 public class ClassTypeCapture<T> {
-	Map<String, Class<?>> types = new HashMap<>();
+    Map<String, Class<?>> types = new HashMap<>();
 
-	public void addType(String typename, Class<?> aKind) {
-		types.put(typename, aKind);
-	}
+    public void addType(String typename, Class<?> aKind) {
+        types.put(typename, aKind);
+    }
 
-	public Object createNew(String typename) {
-		Class<?> cl = types.get(typename);
-		try {
-			return cl.newInstance();
-		} catch(NullPointerException e) {
-			System.out.println("Not a registered typename: " + typename);
-		} catch(Exception e) {
-			System.out.println(e.toString());
-		}
+    public Object createNew(String typename) {
+        Class<?> cl = types.get(typename);
+        try {
+            return cl.newInstance();
+        } catch (NullPointerException e) {
+            System.out.println("Not a registered typename: " + typename);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static void main(String[] args) {
-		ClassTypeCapture ctt = new ClassTypeCapture();
-		
-		ctt.addType("Building", Building.class);
-		ctt.addType("House", House.class);
-		ctt.addType("Product", Product.class);
-		
-		System.out.println((ctt.createNew("Building").getClass()));
-		System.out.println((ctt.createNew("House").getClass()));
-		
-		ctt.createNew("Product");
-		ctt.createNew("Car");
-	}
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public static void main(String[] args) {
+        ClassTypeCapture ctt = new ClassTypeCapture();
+
+        ctt.addType("Building", Building.class);
+        ctt.addType("House", House.class);
+        ctt.addType("Product", Product.class);
+
+        System.out.println((ctt.createNew("Building").getClass()));
+        System.out.println((ctt.createNew("House").getClass()));
+
+        ctt.createNew("Product");
+        ctt.createNew("Car");
+    }
 }

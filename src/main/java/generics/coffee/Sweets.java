@@ -1,12 +1,12 @@
 package generics.coffee;
 
 public class Sweets {
-	private static long counter = 0;
-	private final long id = counter++;
+    private static long counter = 0;
+    private final long id = counter++;
 
-	public String toString() {
-		return getClass().getSimpleName() + " " + id;
-	}
+    public String toString() {
+        return getClass().getSimpleName() + " " + id;
+    }
 }
 
 class Americano extends Sweets {

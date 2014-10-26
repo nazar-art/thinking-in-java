@@ -13,20 +13,20 @@ import java.util.TreeSet;
 
 public class E03 {
 
-	public static void main(String[] args) {
-		Set<String> set = new LinkedHashSet<String>();
-		for (int i = 0; i < 5; i++)
-			set.addAll(Countries.names(10));
-		System.out.println("LinkedHashSet: \t" + set);
-		
-		set = new HashSet<>();
-		for (int i = 0; i < 5; i++) 
-			set.addAll(Countries.names(10));
-		System.out.println("HashSet \t" + set);
-		
-		set = new TreeSet<>();
-		for (int i = 0; i < 5; i++)
-			set.addAll(Countries.names(10));
-		System.out.println("TreeSet \t" + set);
-	}
+    public static void main(String[] args) {
+        Set<String> set = new LinkedHashSet<String>();
+        for (int i = 0; i < 5; i++)
+            set.addAll(Countries.names(10));
+        System.out.println("LinkedHashSet: \t" + set);
+
+        set = new HashSet<>();
+        for (int i = 0; i < 5; i++)
+            set.addAll(Countries.names(10));
+        System.out.println("HashSet \t" + set);
+
+        set = new TreeSet<>();
+        for (int i = 0; i < 5; i++)
+            set.addAll(Countries.names(10));
+        System.out.println("TreeSet \t" + set);
+    }
 }

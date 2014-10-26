@@ -10,27 +10,27 @@ package generics;
  */
 
 class Generic1<T> {
-	void set(T arg) {
-	}
+    void set(T arg) {
+    }
 }
 
 class Genric2<T> {
-	T get() {
-		return null;
-	}
+    T get() {
+        return null;
+    }
 }
 
 public class E28_GenericReadAndWrite {
-	
-	static <T> void f1(Generic1<? super T> obj, T item) {
-		obj.set(item);
-	}
 
-	static <T> T f2(Genric2<? extends T> obj) {
-		return obj.get();
-	}
+    static <T> void f1(Generic1<? super T> obj, T item) {
+        obj.set(item);
+    }
 
-	public static void main(String[] args) {
-		//Generic1<Rodent> g1 = new Generic1<>();
-	}
+    static <T> T f2(Genric2<? extends T> obj) {
+        return obj.get();
+    }
+
+    public static void main(String[] args) {
+        //Generic1<Rodent> g1 = new Generic1<>();
+    }
 }

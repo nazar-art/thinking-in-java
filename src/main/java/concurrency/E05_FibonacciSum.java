@@ -16,53 +16,53 @@ import java.util.concurrent.Future;
 
 class Fibon implements Generator<Integer>, Callable<Integer> {
 
-	private int count;
-	private final int n;
+    private int count;
+    private final int n;
 
-	public Fibon(int n) {
-		this.n = n;
-	}
+    public Fibon(int n) {
+        this.n = n;
+    }
 
-	@Override
-	public Integer next() {
-		return fib(count++);
-	}
+    @Override
+    public Integer next() {
+        return fib(count++);
+    }
 
-	private Integer fib(int i) {
-		if (i < 2)
-			return 1;
-		return fib(i - 2) + fib(i - 1);
-	}
+    private Integer fib(int i) {
+        if (i < 2)
+            return 1;
+        return fib(i - 2) + fib(i - 1);
+    }
 
-	@Override
-	public Integer call() throws Exception {
-		int sum = 0;
-		for (int i = 0; i < n; i++)
-			sum += next();
-		return sum;
-	}
+    @Override
+    public Integer call() throws Exception {
+        int sum = 0;
+        for (int i = 0; i < n; i++)
+            sum += next();
+        return sum;
+    }
 
 }
 
 public class E05_FibonacciSum {
 
-	public static void main(String[] args) {
-		
-		ExecutorService service = Executors.newCachedThreadPool();
-		ArrayList<Future<Integer>> results = new ArrayList<>();
-		
-		for (int i = 1; i <= 5; i++) {
-			results.add(service.submit(new Fibon(i)));
-		}
-		
-		for (Future<Integer> future : results) {
-			try {
-				System.out.println(future.get());
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
-			} finally {
-				service.shutdown();
-			}
-		}
-	}
+    public static void main(String[] args) {
+
+        ExecutorService service = Executors.newCachedThreadPool();
+        ArrayList<Future<Integer>> results = new ArrayList<>();
+
+        for (int i = 1; i <= 5; i++) {
+            results.add(service.submit(new Fibon(i)));
+        }
+
+        for (Future<Integer> future : results) {
+            try {
+                System.out.println(future.get());
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            } finally {
+                service.shutdown();
+            }
+        }
+    }
 }

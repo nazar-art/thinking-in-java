@@ -14,35 +14,35 @@ package exceptions;
 
 @SuppressWarnings("serial")
 class FirstException extends RuntimeException {
-	
+
 }
 
 @SuppressWarnings("serial")
 class SecondException extends RuntimeException {
-	
+
 }
 
 class Testing {
-	void f() throws SecondException {
-		try {
-			g();
-		} catch (FirstException e) {
-			throw new RuntimeException();
-		}
-	}
-	
-	void g() throws FirstException {
-		throw new FirstException();
-	}
+    void f() throws SecondException {
+        try {
+            g();
+        } catch (FirstException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    void g() throws FirstException {
+        throw new FirstException();
+    }
 }
 
 public class Exer_10 {
-	public static void main(String[] args) {
-		Testing testing = new Testing();
+    public static void main(String[] args) {
+        Testing testing = new Testing();
 //		try {
-			testing.f();
+        testing.f();
 //		} catch (SecondException e) {
 //			System.out.println("Caught " + e);
 //		}
-	}
+    }
 }

@@ -12,26 +12,26 @@ import java.util.*;
 
 public class E07 {
 
-	public static void main(String[] args) {
-		@SuppressWarnings("rawtypes")
-		List al = new ArrayList<>(Countries.names(10));
-		@SuppressWarnings("rawtypes")
-		List ll = new LinkedList<>(Countries.names(10));
-		StringBuilder builder = new StringBuilder(1024);
+    public static void main(String[] args) {
+        @SuppressWarnings("rawtypes")
+        List al = new ArrayList<>(Countries.names(10));
+        @SuppressWarnings("rawtypes")
+        List ll = new LinkedList<>(Countries.names(10));
+        StringBuilder builder = new StringBuilder(1024);
 
-		@SuppressWarnings("unchecked")
-		Iterator<String> iter1 = al.iterator();
-		while (iter1.hasNext()) {
-			builder.append(iter1.next() + " ");
-		}
-		System.out.println("ArrayList: \t" + builder);
-		builder.setLength(0);
+        @SuppressWarnings("unchecked")
+        Iterator<String> iter1 = al.iterator();
+        while (iter1.hasNext()) {
+            builder.append(iter1.next() + " ");
+        }
+        System.out.println("ArrayList: \t" + builder);
+        builder.setLength(0);
 
-		@SuppressWarnings("unchecked")
-		Iterator<String> iterator = ll.iterator();
-		while (iterator.hasNext()) {
-			builder.append(iterator.next() + " ");
-		}
-		System.out.println("LinkedList: \t" + builder);
-	}
+        @SuppressWarnings("unchecked")
+        Iterator<String> iterator = ll.iterator();
+        while (iterator.hasNext()) {
+            builder.append(iterator.next() + " ");
+        }
+        System.out.println("LinkedList: \t" + builder);
+    }
 }

@@ -12,34 +12,34 @@ import java.util.Random;
 
 class Item implements Comparable<Item> {
 
-	private static final Random RANDOM = new Random();
-	private Integer priority = RANDOM.nextInt(101);
+    private static final Random RANDOM = new Random();
+    private Integer priority = RANDOM.nextInt(101);
 
-	@Override
-	public int compareTo(Item arg) {
-		return priority < arg.priority ? -1 : 
-			priority == arg.priority ? 0 : 1;
-	}
+    @Override
+    public int compareTo(Item arg) {
+        return priority < arg.priority ? -1 :
+                priority == arg.priority ? 0 : 1;
+    }
 
-	@Override
-	public String toString() {
-		return Integer.toString(priority);
-	}
-	
+    @Override
+    public String toString() {
+        return Integer.toString(priority);
+    }
+
 }
 
 public class E11_PriorityQueue {
 
-	public static void main(String[] args) {
-		PriorityQueue<Item> queue = new PriorityQueue<>();
-		for (int i = 0; i < 10; i++) {
-			queue.add(new Item());
-		}
-		System.out.println(queue.toString());
-		Item item;
-		while ((item = queue.poll()) != null) {
-			System.out.println(item);
-		}
-	}
+    public static void main(String[] args) {
+        PriorityQueue<Item> queue = new PriorityQueue<>();
+        for (int i = 0; i < 10; i++) {
+            queue.add(new Item());
+        }
+        System.out.println(queue.toString());
+        Item item;
+        while ((item = queue.poll()) != null) {
+            System.out.println(item);
+        }
+    }
 
 }
