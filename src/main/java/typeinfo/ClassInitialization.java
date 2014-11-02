@@ -1,11 +1,13 @@
 package typeinfo;
 
 //: typeinfo/ClassInitialization.java
+
 import java.util.*;
 
 class Initable {
     static final int staticFinal = 47;
     static final int staticFinal2 = ClassInitialization.rand.nextInt(1000);
+
     static {
         System.out.println("Initializing Initable");
     }
@@ -13,6 +15,7 @@ class Initable {
 
 class Initable2 {
     static int staticNonFinal = 147;
+
     static {
         System.out.println("Initializing Initable2");
     }
@@ -20,6 +23,7 @@ class Initable2 {
 
 class Initable3 {
     static int staticNonFinal = 74;
+
     static {
         System.out.println("Initializing Initable3");
     }

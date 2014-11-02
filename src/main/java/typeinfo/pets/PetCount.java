@@ -2,22 +2,13 @@ package typeinfo.pets;
 
 //: typeinfo/PetCount.java
 // Using instanceof.
+
 import java.util.HashMap;
 
 import static net.mindview.util.Print.print;
 import static net.mindview.util.Print.printnb;
 
 public class PetCount {
-
-    static class PetCounter extends HashMap<String, Integer> {
-        public void count(String type) {
-            Integer quantity = get(type);
-            if (quantity == null)
-                put(type, 1);
-            else
-                put(type, quantity + 1);
-        }
-    }
 
     public static void countPets(PetCreator creator) {
         PetCounter counter = new PetCounter();
@@ -55,6 +46,16 @@ public class PetCount {
 
     public static void main(String[] args) {
         countPets(new ForNameCreator());
+    }
+
+    static class PetCounter extends HashMap<String, Integer> {
+        public void count(String type) {
+            Integer quantity = get(type);
+            if (quantity == null)
+                put(type, 1);
+            else
+                put(type, quantity + 1);
+        }
     }
 } /*
  * Output: Rat Manx Cymric Mutt Pug Cymric Pug Manx Cymric Rat EgyptianMau

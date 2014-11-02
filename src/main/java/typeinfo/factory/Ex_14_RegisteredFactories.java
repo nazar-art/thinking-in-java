@@ -12,16 +12,11 @@ import java.util.Random;
  */
 
 class Part2 {
-    private static Random random = new Random(47);
-
     static List<Class<? extends Part2>> partClasses = Arrays.asList(
             FuelFilter2.class, AirFilter2.class, CabinAirFilter2.class,
             OilFilter2.class, FanBelt2.class, PowerSteeringBelt2.class,
             GeneratorBelt2.class);
-
-    public String toString() {
-        return getClass().getSimpleName();
-    }
+    private static Random random = new Random(47);
 
     public static Part2 createRandom() {
         int n = random.nextInt(partClasses.size());
@@ -30,6 +25,10 @@ class Part2 {
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException();
         }
+    }
+
+    public String toString() {
+        return getClass().getSimpleName();
     }
 }
 
