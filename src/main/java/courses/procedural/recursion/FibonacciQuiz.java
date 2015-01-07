@@ -24,5 +24,3 @@ public class FibonacciQuiz {
         return (x < 2) ? x : f(x - 2) + f(x - 1);
     }
 }
-
-

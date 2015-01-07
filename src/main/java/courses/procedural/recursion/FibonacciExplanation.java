@@ -5,6 +5,7 @@ class FibonacciExplanation {
     public static void main(String[] args) {
         f(5);
     }
+
     public static int f(int x) {
         in(x);
         int result = (x < 2) ? x : f(x - 2) + f(x - 1);
