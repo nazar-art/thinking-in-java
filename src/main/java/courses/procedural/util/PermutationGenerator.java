@@ -45,19 +45,14 @@ public class PermutationGenerator {
         }
 
         for (int i = 0; i < string.length(); i++) {
-            // Form a simpler word by removing the ith character
             String shorterWord = string.substring(0, i) + string.substring(i + 1);
 
-            // Generate all permutations of the simpler word
             ArrayList<String> shorterWordPermutations = permute(shorterWord);
 
-            // Add the removed character to the front of
-            // each permutation of the simpler word,
             for (String s : shorterWordPermutations) {
                 permutations.add(string.charAt(i) + s);
             }
         }
-        // Return all permutations
         return permutations;
     }
 }
