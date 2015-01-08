@@ -18,19 +18,46 @@ public class PermutationGenerator {
             return permutations;
         }
 
-        for (int index = 0; index < word.length(); index++) {
-            // Form the simpler word by removing the ith character
-            String shorterWord = word.substring(0, index) + word.substring(index, word.length() - 1);
+        for (int i = 0; i < word.length(); i++) {
+            // Form a simpler word by removing the ith character
+            String shorterWord = word.substring(0, i) + word.substring(i + 1);
 
-            // Generate all permutations for shorter word
-            PermutationGenerator generator = new PermutationGenerator(shorterWord);
-            ArrayList<String> shorterWordPermutations = generator.getPermutations();
+            // Generate all permutations of the simpler word
+            PermutationGenerator shorterPermutationGenerator = new PermutationGenerator(shorterWord);
+            ArrayList<String> shorterWordPermutations = shorterPermutationGenerator.getPermutations();
 
-            // Add removed character to the front of each permutations of the simpler word:
-            for (String shortWord : shorterWordPermutations) {
-                permutations.add(word.charAt(index) + shorterWord);
+            // Add the removed character to the front of
+            // each permutation of the simpler word,
+            for (String s : shorterWordPermutations) {
+                permutations.add(word.charAt(i) + s);
             }
         }
+        // Return all permutations
+        return permutations;
+    }
+
+    public static ArrayList<String> permute(String string) {
+        ArrayList<String> permutations = new ArrayList<>();
+
+        if (string.length() == 0) {
+            permutations.add(string);
+            return permutations;
+        }
+
+        for (int i = 0; i < string.length(); i++) {
+            // Form a simpler word by removing the ith character
+            String shorterWord = string.substring(0, i) + string.substring(i + 1);
+
+            // Generate all permutations of the simpler word
+            ArrayList<String> shorterWordPermutations = permute(shorterWord);
+
+            // Add the removed character to the front of
+            // each permutation of the simpler word,
+            for (String s : shorterWordPermutations) {
+                permutations.add(string.charAt(i) + s);
+            }
+        }
+        // Return all permutations
         return permutations;
     }
 }
