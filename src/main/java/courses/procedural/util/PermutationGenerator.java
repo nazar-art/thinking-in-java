@@ -39,20 +39,26 @@ public class PermutationGenerator {
     public static ArrayList<String> permute(String string) {
         ArrayList<String> permutations = new ArrayList<>();
 
-        if (string.length() == 0) {
+        if (string.length() == 0) { // The empty string has a single permutation: itself
+//            System.out.println("string >> " + string);
             permutations.add(string);
             return permutations;
         }
 
+        // Loop through all character positions
         for (int i = 0; i < string.length(); i++) {
+            // Form a simpler word by removing the ith character
             String shorterWord = string.substring(0, i) + string.substring(i + 1);
 
+            // Generate all permutations of the simpler word
             ArrayList<String> shorterWordPermutations = permute(shorterWord);
 
+            // Add the removed character to the front of each permutation of the simpler word,
             for (String s : shorterWordPermutations) {
                 permutations.add(string.charAt(i) + s);
             }
         }
+        // Return all permutations
         return permutations;
     }
 }
