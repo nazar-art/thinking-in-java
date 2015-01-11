@@ -24,23 +24,23 @@ class Evaluator {
      * @return the value of the expression.
      */
     public int getExpressionValue() {
-        int value = getTermValue();
+        int valueOne = getTermValue();
         boolean done = false;
         while (!done) {
             String next = tokenizer.peekToken();
             if ("+".equals(next) || "-".equals(next)) {
                 tokenizer.nextToken(); // Discard "+" or "-"
-                int value2 = getTermValue();
+                int valueTwo = getTermValue();
                 if ("+".equals(next)) {
-                    value = value + value2;
+                    valueOne = valueOne + valueTwo;
                 } else {
-                    value = value - value2;
+                    valueOne = valueOne - valueTwo;
                 }
             } else {
                 done = true;
             }
         }
-        return value;
+        return valueOne;
     }
 
     /**
@@ -49,23 +49,23 @@ class Evaluator {
      * @return the value of the term
      */
     public int getTermValue() {
-        int value = getFactorValue();
+        int valueOne = getFactorValue();
         boolean done = false;
         while (!done) {
             String next = tokenizer.peekToken();
             if ("*".equals(next) || "/".equals(next)) {
                 tokenizer.nextToken();
-                int value2 = getFactorValue();
+                int valueTwo = getFactorValue();
                 if ("*".equals(next)) {
-                    value = value * value2;
+                    valueOne = valueOne * valueTwo;
                 } else {
-                    value = value / value2;
+                    valueOne = valueOne / valueTwo;
                 }
             } else {
                 done = true;
             }
         }
-        return value;
+        return valueOne;
     }
 
     /**
@@ -140,6 +140,7 @@ class ExpressionTokenizer {
         } else {
             end = start + 1;
         }
+//        System.out.println(">>result - " + result);
         return result;
     }
 }
@@ -148,8 +149,8 @@ public class ExpressionCalculator {
     public static void main(String[] args) {
         ArrayList<String> expressions = new ArrayList<>();
         expressions.add("3+4*5");
-        expressions.add("(3+4)*5");
-        expressions.add("1-(2-(3-(4-5)))");
+//        expressions.add("(3+4)*5");
+//        expressions.add("1-(2-(3-(4-5)))");
 
         for (String expression : expressions) {
             Evaluator e = new Evaluator(expression);
