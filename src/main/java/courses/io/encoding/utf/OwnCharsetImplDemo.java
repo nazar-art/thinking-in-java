@@ -4,9 +4,9 @@ import java.nio.charset.StandardCharsets;
 
 public class OwnCharsetImplDemo {
     public static void main(String[] args) {
-//        oneByteUtf();
-//        twoByteUtf();
-//        threeByteUtf();
+        oneByteUtf();
+        twoByteUtf();
+        threeByteUtf();
         fourByteUtf();
     }
 
@@ -53,7 +53,7 @@ public class OwnCharsetImplDemo {
         System.out.print(".");
         System.out.print(leftZeroPadding(Integer.toBinaryString(0xFF & utf8bytes[1]), 8));
         System.out.print(".");
-        System.out.print(leftZeroPadding(Integer.toBinaryString(0xFF & utf8bytes[2]), 8));
+        System.out.println(leftZeroPadding(Integer.toBinaryString(0xFF & utf8bytes[2]), 8));
     }
 
     private static void twoByteUtf() {
@@ -70,7 +70,7 @@ public class OwnCharsetImplDemo {
         System.out.print("utf8bytes: ");
         System.out.print(leftZeroPadding(Integer.toBinaryString(0xFF & utf8bytes[0]), 8));
         System.out.print(".");
-        System.out.print(leftZeroPadding(Integer.toBinaryString(0xFF & utf8bytes[1]), 8));
+        System.out.println(leftZeroPadding(Integer.toBinaryString(0xFF & utf8bytes[1]), 8));
     }
 
     private static void oneByteUtf() {
@@ -83,7 +83,7 @@ public class OwnCharsetImplDemo {
         String str = new String(new int[]{codePoint}, 0, 1);
         byte[] utf8bytes = str.getBytes(StandardCharsets.UTF_8);
         System.out.print("utf8bytes: ");
-        System.out.print(leftZeroPadding(Integer.toBinaryString(0xFF & utf8bytes[0]), 8));
+        System.out.println(leftZeroPadding(Integer.toBinaryString(0xFF & utf8bytes[0]), 8));
     }
 
     public static String leftZeroPadding(String str, int len) {
