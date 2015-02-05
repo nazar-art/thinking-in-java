@@ -12,11 +12,27 @@ public class EntityDataInput implements EntityInput {
 
     @Override
     public Person readPerson() throws IOException {
-        String name = in.readUTF();
+        String name = in.readBoolean() ? in.readUTF() : null;
         int age = in.readInt();
-        Person.Sex[] sexArray = new Person.Sex[in.readInt()];
-        for (int i = 0; i < sexArray.length; i++) {
-            sexArray[i] = in.readBoolean() ? Person.Sex.FEMALE : Person.Sex.MALE;
+
+        boolean sexNotNull = in.readBoolean();
+        Person.Sex[] sexArray = null;
+        if (sexNotNull) {
+            sexArray = new Person.Sex[in.readInt()];
+            for (int i = 0; i < sexArray.length; i++) {
+                byte sexByte = in.readByte();
+                switch (sexByte) {
+                    case 0:
+                        sexArray[i] = null;
+                        break;
+                    case 1:
+                        sexArray[i] = Person.Sex.FEMALE;
+                        break;
+                    case 2:
+                        sexArray[i] = Person.Sex.MALE;
+                        break;
+                }
+            }
         }
         return new Person(name, age, sexArray);
     }

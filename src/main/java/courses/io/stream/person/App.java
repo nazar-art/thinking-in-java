@@ -10,8 +10,9 @@ public class App {
 
         new EntityDataOutput(
                 new DataOutputStream(buff)).writePerson(
-                new Person("Mike", 45, new Person.Sex[]{Person.Sex.MALE}));
+                new Person("Valera Gregorius", 45, new Person.Sex[]{Person.Sex.MALE}));
         byte[] bytes = buff.toByteArray();
+
         print(bytes.length);
         print(new String(bytes));
 
@@ -19,5 +20,8 @@ public class App {
                 new DataInputStream(
                         new ByteArrayInputStream(bytes))).readPerson();
         print(p);
+
+        buff.flush();
+        buff.close();
     }
 }
