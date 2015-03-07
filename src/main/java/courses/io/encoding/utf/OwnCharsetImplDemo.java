@@ -6,8 +6,11 @@ import java.util.Arrays;
 public class OwnCharsetImplDemo {
     public static void main(String[] args) {
         oneByteUtf();
+        System.out.println();
         twoByteUtf();
+        System.out.println();
         threeByteUtf();
+        System.out.println();
         fourByteUtf();
     }
 
