@@ -1,40 +1,64 @@
 package courses.procedural.recursion.fibonacci;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class CachedFibonacci {
-    private static Map<BigInteger, BigInteger> previousValuesHolder;
+    private static Map<BigDecimal, BigDecimal> previousValuesHolder;
     static {
         previousValuesHolder = new HashMap<>();
-        previousValuesHolder.put(new BigInteger(String.valueOf(0)), new BigInteger(String.valueOf(0)));
-        previousValuesHolder.put(new BigInteger(String.valueOf(1)), new BigInteger(String.valueOf(1)));
+        previousValuesHolder.put(BigDecimal.ZERO, BigDecimal.ZERO);
+        previousValuesHolder.put(BigDecimal.ONE, BigDecimal.ONE);
     }
 
-    public static BigInteger getFibonacciOf(long number) {
+    public static BigDecimal getFibonacciOf(long number) {
         if (0 == number) {
-            return new BigInteger(String.valueOf(0));
+            return BigDecimal.ZERO;
         } else if (1 == number) {
-            return new BigInteger(String.valueOf(1));
+            return BigDecimal.ONE;
         } else {
-            if (previousValuesHolder.containsKey(BigInteger.valueOf(number))) {
-                return previousValuesHolder.get(BigInteger.valueOf(number));
+            if (previousValuesHolder.containsKey(BigDecimal.valueOf(number))) {
+                return previousValuesHolder.get(BigDecimal.valueOf(number));
             } else {
-                BigInteger olderValue = new BigInteger(String.valueOf(1));
-                BigInteger oldValue = new BigInteger(String.valueOf(1));
-                BigInteger newValue = new BigInteger(String.valueOf(1));
+                BigDecimal olderValue = BigDecimal.ONE,
+                        oldValue = BigDecimal.ONE,
+                        newValue = BigDecimal.ONE;
 
                 for (int i = 3; i <= number; i++) {
                     newValue = oldValue.add(olderValue);
                     olderValue = oldValue;
                     oldValue = newValue;
                 }
-                previousValuesHolder.put(BigInteger.valueOf(number), newValue);
+                previousValuesHolder.put(BigDecimal.valueOf(number), newValue);
                 return newValue;
             }
         }
+    }
+
+    public static BigDecimal getFibonacci(long n) {
+        if(n <= 1) {
+            return BigDecimal.ONE;
+        }
+        BigDecimal first = BigDecimal.ONE, second = BigDecimal.ONE;
+        BigDecimal result = BigDecimal.ZERO;
+        for(int i = 2; i <= n; i++) {
+            result = first.add(second);
+            first = second;
+            second = result;
+        }
+        return result;
+    }
+
+    public static BigDecimal getFibonacciDynamic(long n) {
+        BigDecimal[] f = new BigDecimal[(int)(n + 1)];
+        f[0] = BigDecimal.ZERO;
+        f[1] = BigDecimal.ONE;
+        for(int i = 2; i <= n; i++) {
+            f[i] = f[i - 1].add(f[i - 2]);
+        }
+        return f[(int)n];
     }
 
     public static void main(String[] args) {
@@ -44,11 +68,13 @@ public class CachedFibonacci {
             long inputNumber = scanner.nextLong();
             if (inputNumber >= 0) {
                 long beginTime = System.currentTimeMillis();
-                BigInteger fibo = getFibonacciOf(inputNumber);
+                BigDecimal fibo = getFibonacciOf(inputNumber);
+//                BigDecimal fibo = getFibonacci(inputNumber);
+//                BigDecimal fibo = getFibonacciDynamic(inputNumber);
                 long endTime = System.currentTimeMillis();
                 long delta = endTime - beginTime;
 
-                System.out.printf("F(%d) = %d ... computed in %d milliseconds\n", inputNumber, fibo, delta);
+                System.out.printf("F(%d) = %.0f ... computed in %,d milliseconds\n", inputNumber, fibo, delta);
             } else {
                 System.err.println("You must enter number > 0");
                 System.out.println("try, enter number again, please:");
