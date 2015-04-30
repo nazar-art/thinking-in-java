@@ -13,7 +13,7 @@ public class CachedFibonacci {
         previousValuesHolder.put(BigDecimal.ONE, BigDecimal.ONE);
     }
 
-    public static BigDecimal getFibonacciOf(long number) {
+    public static BigDecimal getCachedFibonacciOf(long number) {
         if (0 == number) {
             return BigDecimal.ZERO;
         } else if (1 == number) {
@@ -37,7 +37,7 @@ public class CachedFibonacci {
         }
     }
 
-    public static BigDecimal getFibonacci(long n) {
+    public static BigDecimal getIterativeFibonacci(long n) {
         if(n <= 1) {
             return BigDecimal.ONE;
         }
@@ -67,14 +67,14 @@ public class CachedFibonacci {
             System.out.print("Enter n: ");
             long inputNumber = scanner.nextLong();
             if (inputNumber >= 0) {
-                long beginTime = System.currentTimeMillis();
-                BigDecimal fibo = getFibonacciOf(inputNumber);
-//                BigDecimal fibo = getFibonacci(inputNumber);
+                long beginTime = System.nanoTime();
+                BigDecimal fibo = getCachedFibonacciOf(inputNumber);
+//                BigDecimal fibo = getIterativeFibonacci(inputNumber);
 //                BigDecimal fibo = getFibonacciDynamic(inputNumber);
-                long endTime = System.currentTimeMillis();
+                long endTime = System.nanoTime();
                 long delta = endTime - beginTime;
 
-                System.out.printf("F(%d) = %.0f ... computed in %,d milliseconds\n", inputNumber, fibo, delta);
+                System.out.printf("F(%d) = %.0f ... computed in %,d ms\n", inputNumber, fibo, delta / 1_000_000);
             } else {
                 System.err.println("You must enter number > 0");
                 System.out.println("try, enter number again, please:");
