@@ -1,4 +1,4 @@
-package courses.io.seriliazation;
+package courses.io.serialiazation;
 
 public interface Task {
     public Task next();

@@ -1,4 +1,4 @@
-package courses.io.seriliazation;
+package courses.io.serialiazation;
 
 import java.io.*;
 
