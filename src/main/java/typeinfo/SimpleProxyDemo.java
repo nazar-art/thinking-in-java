@@ -29,12 +29,23 @@ class SimpleProxy implements Interface {
 
     public void doSomething() {
         print("SimpleProxy doSomething");
+
+        long before = System.nanoTime();
         proxied.doSomething();
+        long after = System.nanoTime();
+        long delta = (before - after) / 1_000_000;
+        System.out.println("method run time: " + delta);
     }
 
     public void somethingElse(String arg) {
         print("SimpleProxy somethingElse " + arg);
+
+        long before = System.currentTimeMillis();
         proxied.somethingElse(arg);
+        long after = System.currentTimeMillis();
+//        long delta = (before - after) / 1_000_000_000;
+        long delta = before - after;
+        System.out.printf("method run time: %s ms\n", delta);
     }
 }
 

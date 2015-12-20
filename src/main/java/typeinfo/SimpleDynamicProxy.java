@@ -39,7 +39,9 @@ class SimpleDynamicProxy {
                 new DynamicProxyHandler(real));
         consumer(proxy);
     }
-} /* Output: (95% match)
+}
+
+/* Output: (95% match)
 doSomething
 somethingElse bonobo
 **** proxy: class $Proxy0, method: public abstract void Interface.doSomething(), args: null
