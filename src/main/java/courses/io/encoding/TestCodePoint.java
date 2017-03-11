@@ -10,10 +10,20 @@ public class TestCodePoint {
         testCodePoint(165_536);
     }
 
-    private static void testCodePoint(int codePoint) {
+    public static void testCodePoint(int codePoint) {
         char[] chars = Character.toChars(codePoint);
         System.out.println("char[]: " + Arrays.toString(chars));
         String str = new String(chars);
+        System.out.println("string: " + str);
+        System.out.println("string.length: " + str.length());
+        System.out.println("string.codePointCount: " + str.codePointCount(0, str.length()));
+        System.out.println();
+    }
+
+    public static void testCodePoint(String str) {
+//        char[] chars = Character.toChars(codePoint);
+        System.out.println("char[]: " + Arrays.toString(str.toCharArray()));
+//        String str = new String(chars);
         System.out.println("string: " + str);
         System.out.println("string.length: " + str.length());
         System.out.println("string.codePointCount: " + str.codePointCount(0, str.length()));

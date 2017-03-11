@@ -105,7 +105,7 @@ public class OwnCharsetImplDemo {
         return str;
     }
 
-    private static void showChars(int codePoint, byte[] utf8bytes) {
+    public static void showChars(int codePoint, byte[] utf8bytes) {
         System.out.printf("%s - bytes representation (UTF-8)\n", Arrays.toString(utf8bytes));
         char[] chars = Character.toChars(codePoint);
         System.out.printf("%s - chars looking (UTF-16)\n", Arrays.toString(chars));
