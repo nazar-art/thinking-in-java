@@ -1,5 +1,9 @@
 package courses.procedural.jenkins;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 public class ArrayPermutation {
 
     private static final String PREFIX = "ignore(FAILURE) { build(\"tsm-edge-load\", ";
@@ -20,15 +24,45 @@ public class ArrayPermutation {
             "&&&",
             "$$$"};
 
-    public static void main(String[] args) {
-        for (String first : arr_1) {
-            for (String second : arr_2) {
-                System.out.println(PREFIX + first + second + ENDING);
+    public static List<String> getCombinations(String prefix, String ending, String[]... arrays) {
+        List<String> results = new ArrayList<>();
+        Stack<String[]> combinations = new Stack<>();
+        combinations.add(new String[arrays.length]);
+
+        while (!combinations.isEmpty()) {
+            String[] currentArray = combinations.pop();
+
+            boolean complete = true;
+            for (int i = 0; i < arrays.length; i++) {
+                if (currentArray[i] == null) {
+                    complete = false;
+                    for (int j = 0; j < arrays[i].length; j++) {
+                        String[] newArray = currentArray.clone();
+                        newArray[i] = arrays[i][j];
+                        combinations.add(newArray);
+                    }
+                }
             }
-            for (String second : arr_3) {
-                System.out.println(PREFIX + first + second + ENDING);
+
+            if (complete) {
+                StringBuilder stringBuilder = new StringBuilder(prefix);
+                for (String string : currentArray) {
+                    stringBuilder.append(string);
+                }
+                stringBuilder.append(ending);
+                results.add(stringBuilder.toString());
             }
         }
+
+        return results;
+    }
+
+    public static void main(String[] args) {
+        List<String> permutations = getCombinations(PREFIX, ENDING, arr_1, arr_2, arr_3);
+
+        permutations.stream()
+                .distinct()
+                .forEach(System.out::println);
     }
 
 }
