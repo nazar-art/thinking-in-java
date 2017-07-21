@@ -1,13 +1,14 @@
 package courses.procedural.jenkins;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ArrayPermutation {
 
     private static final String PREFIX = "ignore(FAILURE) { build(\"tsm-edge-load\", ";
     public static final String ENDING = ")}";
+
+    private static final String FIRST_BUILD_PART = " KILL_CLUSTER: true, BUILD_CLUSTER: true, ";
 
     private static String[] arr_1 = new String[]{
             "111",
@@ -24,22 +25,22 @@ public class ArrayPermutation {
             "&&&",
             "$$$"};
 
-    public static List<String> getCombinations(String prefix, String ending, String[]... arrays) {
-        List<String> results = new ArrayList<>();
-        Stack<String[]> combinations = new Stack<>();
-        combinations.add(new String[arrays.length]);
+    public static Set<String> getCombinations(String prefix, String ending, String[]... arrays) {
+        Set<String> results = new HashSet<>();
+        Stack<String[]> stack = new Stack<>();
+        stack.add(new String[arrays.length]);
 
-        while (!combinations.isEmpty()) {
-            String[] currentArray = combinations.pop();
+        while (!stack.isEmpty()) {
+            String[] currentArray = stack.pop();
 
             boolean complete = true;
-            for (int i = 0; i < arrays.length; i++) {
-                if (currentArray[i] == null) {
+            for (int arrIndex = 0; arrIndex < arrays.length; arrIndex++) {
+                if (currentArray[arrIndex] == null) {
                     complete = false;
-                    for (int j = 0; j < arrays[i].length; j++) {
+                    for (int j = 0; j < arrays[arrIndex].length; j++) {
                         String[] newArray = currentArray.clone();
-                        newArray[i] = arrays[i][j];
-                        combinations.add(newArray);
+                        newArray[arrIndex] = arrays[arrIndex][j];
+                        stack.add(newArray);
                     }
                 }
             }
@@ -58,11 +59,12 @@ public class ArrayPermutation {
     }
 
     public static void main(String[] args) {
-        List<String> permutations = getCombinations(PREFIX, ENDING, arr_1, arr_2, arr_3);
+        Set<String> permutations = getCombinations(PREFIX, ENDING, arr_1, arr_2, arr_3);
 
-        permutations.stream()
-                .distinct()
-                .forEach(System.out::println);
+        permutations.forEach(System.out::println);
+
+
+
     }
 
 }

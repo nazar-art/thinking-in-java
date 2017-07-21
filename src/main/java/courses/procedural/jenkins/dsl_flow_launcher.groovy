@@ -41,20 +41,20 @@ ignore(FAILURE) {
 }
 // #2
 ignore(FAILURE) {
-    build("tms-edge-load",
-            "BUILD_CLUSTER": "false",
+    build('tms-edge-load',
+            'BUILD_CLUSTER': 'false',
 
-            "CALLS_RATE": "50",
-            "MAX_SIMULT_CALLS": "400",
-            "LOCAL_CODEC": "PCMU",
-            "REMOTE_CODEC": "PCMU",
-            "NUM_LOOPS": "4",
-            "VOICE_TRACE": "0",
-            "MAX_LOSS_PERCENT": "1",
-            "NUM_RUNS": "3",
+            'CALLS_RATE': '50',
+            'MAX_SIMULT_CALLS': '400',
+            'LOCAL_CODEC': 'PCMU',
+            'REMOTE_CODEC': 'PCMU',
+            'NUM_LOOPS': '4',
+            'VOICE_TRACE': '0',
+            'MAX_LOSS_PERCENT': '1',
+            'NUM_RUNS': '3',
 
-            "RECORD": "true",
-            "NUM_CHANNELS": "2"
+            'RECORD': 'true',
+            'NUM_CHANNELS': '2'
     )
 }
 // #3
@@ -424,3 +424,52 @@ ignore(FAILURE) {
             "NUM_CHANNELS": "2"
     )
 }
+
+
+// =============
+
+
+// good
+ignore(FAILURE) { build('tms-edge-load',
+        'BUILD_CLUSTER': 'false',
+        'CALLS_RATE': '50',
+        'MAX_SIMULT_CALLS': '400',
+        'LOCAL_CODEC': 'PCMU',
+        'REMOTE_CODEC': 'PCMU',
+        'NUM_LOOPS': '4',
+        'VOICE_TRACE': '0',
+        'MAX_LOSS_PERCENT': '1',
+        'NUM_RUNS': '3',
+        'RECORD': 'true',
+        'NUM_CHANNELS': '2',
+)}
+
+
+// failed
+ignore(FAILURE) { build('tms-edge-load',
+        'BUILD_CLUSTER': 'false',
+
+        'CALLS_RATE': '50',
+        'MAX_SIMULT_CALLS': '400',
+        'LOCAL_CODEC': 'PCMU',
+        'REMOTE_CODEC': 'PCMU',
+        'NUM_LOOPS': '4',
+        'VOICE_TRACE': '0',
+        'MAX_LOSS_PERCENT': '1',
+        'NUM_RUNS': '3',
+
+        'RECORD': 'true',
+        'NUM_CHANNELS': '2',
+
+        'LOCAL_SRTP': 'true',
+        'LOCAL_SRTP_CIPHER': 'aes-128-icm',
+        'LOCAL_SRTP_AUTH': 'hmac-sha1-80',
+
+        'REMOTE_SRTP': 'true',
+        'REMOTE_SRTP_CIPHER': 'aes-128-icm',
+        'REMOTE_SRTP_AUTH': 'hmac-sha1-80',
+
+        'HANGUP_ON_STAR': 'false',
+        'REMOTE_DTMF_PAYLOAD_TYPE': '101',
+        'LOCAL_DTMF_PAYLOAD_TYPE': '101'
+)}
