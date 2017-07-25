@@ -131,13 +131,12 @@ ignore(FAILURE) {
     builds.put("longevity-num_channels=2", build("tms-edge-load", "BUILD_CLUSTER": "false", "CALLS_RATE": "50", "MAX_SIMULT_CALLS": "600", "RECORD": "true", "LOCAL_CODEC": "PCMU", "REMOTE_CODEC": "PCMU", "LOCAL_SRTP": "true", "LOCAL_SRTP_CIPHER": "aes-128-icm", "LOCAL_SRTP_AUTH": "hmac-sha1-80", "REMOTE_SRTP": "true", "REMOTE_SRTP_CIPHER": "aes-128-icm", "REMOTE_SRTP_AUTH": "hmac-sha1-80", "NUM_LOOPS": "60", "VOICE_TRACE": "3", "MAX_LOSS_PERCENT": "1", "NUM_RUNS": "3", "HANGUP_ON_STAR": "true", "REMOTE_DTMF_PAYLOAD_TYPE": "101", "LOCAL_DTMF_PAYLOAD_TYPE": "101", "NUM_CHANNELS": "2"))
 }
 
-println '************ THE END OF THE RUN *************\n'
+println '\n************ TEST RESULTS *************'
 
 for (bld in builds) {
-    println "\nFinished execution for: " + bld.key +
-            " Build " + hudson.console.HyperlinkNote.encodeTo("/" + bld.value.getUrl(),
+    println "[" + bld.key + "] build " + hudson.console.HyperlinkNote.encodeTo("/" + bld.value.getUrl(),
             String.valueOf(bld.value.getDisplayName())) +
-            " status:" + hudson.console.HyperlinkNote.encodeTo('/' + bld.value.getUrl() + "console",
+            " status: " + hudson.console.HyperlinkNote.encodeTo('/' + bld.value.getUrl() + "console",
             bld.value.result.toString())
 
     build.setResult(build.result.combine(bld.value.result))
