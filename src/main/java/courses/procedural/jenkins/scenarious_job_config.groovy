@@ -135,8 +135,10 @@ println '************ THE END OF THE RUN *************\n'
 
 for (bld in builds) {
     println "\nFinished execution for: " + bld.key +
-            "Build " + hudson.console.HyperlinkNote.encodeTo("/" + bld.value.getUrl(),
+            " Build " + hudson.console.HyperlinkNote.encodeTo("/" + bld.value.getUrl(),
             String.valueOf(bld.value.getDisplayName())) +
             " status:" + hudson.console.HyperlinkNote.encodeTo('/' + bld.value.getUrl() + "console",
             bld.value.result.toString())
+
+    build.setResult(build.result.combine(bld.value.result))
 }
