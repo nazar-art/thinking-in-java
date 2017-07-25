@@ -1,8 +1,6 @@
 package courses.procedural.jenkins
 
 
-// todo omit package in real shell script
-
 ignore(FAILURE) { build("tms-edge-load", "KILL_CLUSTER": "true", "BUILD_CLUSTER": "true",
 
         "CALLS_RATE": "50",
@@ -430,7 +428,8 @@ ignore(FAILURE) {
 
 
 // good
-ignore(FAILURE) { build('tms-edge-load',
+ignore(FAILURE) {
+    b = build('tms-edge-load',
         'BUILD_CLUSTER': 'false',
         'CALLS_RATE': '50',
         'MAX_SIMULT_CALLS': '400',
@@ -443,6 +442,9 @@ ignore(FAILURE) { build('tms-edge-load',
         'RECORD': 'true',
         'NUM_CHANNELS': '2',
 )}
+println "Build number: $b.build.number"
+println "Result: $b.build.status"
+println "Result: $b.build.result"
 
 
 // failed

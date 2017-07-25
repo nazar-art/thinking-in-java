@@ -31,7 +31,6 @@ public class ArrayPermutationExample {
             "'RECORD': 'false','NUM_CHANNELS': '1', "
     };
 
-
     private static String[] perm_2 = new String[]{
             "'LOCAL_SRTP': 'true', 'LOCAL_SRTP_CIPHER': 'aes-128-icm', 'LOCAL_SRTP_AUTH': 'hmac-sha1-80', ",
             "'LOCAL_SRTP': 'false', 'REMOTE_SRTP_CIPHER': 'aes-128-icm', 'REMOTE_SRTP_AUTH': 'hmac-sha1-80', "
@@ -56,7 +55,7 @@ public class ArrayPermutationExample {
     };
 
     private static String[] other_perm_2 = new String[]{
-            "'LOCAL_SRTP': 'true', 'LOCAL_SRTP_CIPHER': 'aes-128-icm', 'LOCAL_SRTP_AUTH': hmac-sha1-32, 'REMOTE_SRTP': 'true', 'REMOTE_SRTP_CIPHER': 'aes-128-icm', 'REMOTE_SRTP_AUTH': hmac-sha1-32, 'HANGUP_ON_STAR': 'true', 'REMOTE_DTMF_PAYLOAD_TYPE': '101', 'LOCAL_DTMF_PAYLOAD_TYPE': '96'"
+            "'LOCAL_SRTP': 'true', 'LOCAL_SRTP_CIPHER': 'aes-128-icm', 'LOCAL_SRTP_AUTH': 'groovy.lang.MissingMethodException', 'REMOTE_SRTP': 'true', 'REMOTE_SRTP_CIPHER': 'aes-128-icm', 'REMOTE_SRTP_AUTH': 'groovy.lang.MissingMethodException', 'HANGUP_ON_STAR': 'true', 'REMOTE_DTMF_PAYLOAD_TYPE': '101', 'LOCAL_DTMF_PAYLOAD_TYPE': '96'"
     };
 
     private static String[] other_perm_3 = new String[]{
@@ -64,7 +63,7 @@ public class ArrayPermutationExample {
     };
 
     private static String[] other_perm_4 = new String[]{
-            "'LOCAL_SRTP': 'true', 'LOCAL_SRTP_CIPHER': 'aes-256-icm', 'LOCAL_SRTP_AUTH': hmac-sha1-32, 'REMOTE_SRTP': 'true', 'REMOTE_SRTP_CIPHER': 'aes-256-icm', 'REMOTE_SRTP_AUTH': hmac-sha1-32, 'HANGUP_ON_STAR': 'true', 'REMOTE_DTMF_PAYLOAD_TYPE': '96', 'LOCAL_DTMF_PAYLOAD_TYPE': '96'"
+            "'LOCAL_SRTP': 'true', 'LOCAL_SRTP_CIPHER': 'aes-256-icm', 'LOCAL_SRTP_AUTH': 'groovy.lang.MissingMethodException', 'REMOTE_SRTP': 'true', 'REMOTE_SRTP_CIPHER': 'aes-256-icm', 'REMOTE_SRTP_AUTH': 'groovy.lang.MissingMethodException', 'HANGUP_ON_STAR': 'true', 'REMOTE_DTMF_PAYLOAD_TYPE': '96', 'LOCAL_DTMF_PAYLOAD_TYPE': '96'"
     };
 
     private static String[] other_perm_5 = new String[]{
@@ -86,7 +85,6 @@ public class ArrayPermutationExample {
         Set<String> permutation = ArrayPermutation
                 .getCombinations(PREFIX + DEFAULT_PART_FOR_PERMUTAION, ENDING, perm_1, perm_2, perm_3, perm_4);
 
-//         TODO: 7/21/17 for first one add kill cluster and build cluster params
 //        permutation.stream().limit(1).forEach(System.out::println);
         Set<String> firstOne = permutation.stream().limit(1).collect(Collectors.toSet());
 
