@@ -133,45 +133,27 @@ ignore(FAILURE) {
 
 println '\n************ TEST RESULTS *************'
 
-writer = new StringWriter()
+def file = new File(build.workspace.toString() + "/report.xml")
+writer = file.newWriter()
 builder = new groovy.xml.MarkupBuilder(writer)
 
-builder.testsuite(tests: builds.size()) {
-    for (bld in builds) {
-        def buildName = bld.key
-        def numberOfBuild = hudson.console.HyperlinkNote.encodeTo("/" + bld.value.getUrl(),
-                String.valueOf(bld.value.getDisplayName()))
-        def statusOfBuild = hudson.console.HyperlinkNote.encodeTo('/' + bld.value.getUrl()
-                + "console", bld.value.result.toString())
+builder.testsuites() {
+    builder.testsuite(name: "tms-edge-load", tests: builds.size()) {
+        for (bld in builds) {
+            def buildName = bld.key
+            def statusOfBuild = hudson.console.HyperlinkNote.encodeTo('/' + bld.value.getUrl()
+                    + "console", bld.value.result.toString())
+            println statusOfBuild
 
-        if (statusOfBuild.contains("FAILURE")) {
-            testcase(name: "$buildName", build_number: "$numberOfBuild") {
-                failure()
+            if (!statusOfBuild.contains("SUCCESS")) {
+                testcase(name: "$buildName") {
+                    failure()
+                }
+            } else {
+                testcase(name: "$buildName")
             }
-        } else {
-            testcase(name: "$buildName", build_number: "$numberOfBuild")
         }
-
-        build.setResult(build.result.combine(bld.value.result))
     }
 }
-
 println writer.toString()
-
-def file = new File("report.xml")
-file << result
-
-
-// ===========
-
-/*for (bld in builds) {
-    def buildName = bld.key
-    def numberOfBuild = hudson.console.HyperlinkNote.encodeTo("/" + bld.value.getUrl(),
-            String.valueOf(bld.value.getDisplayName()))
-    def statusOfBuild = hudson.console.HyperlinkNote.encodeTo('/' + bld.value.getUrl()
-            + "console", bld.value.result.toString())
-
-//    println "\n[" + buildName + "] build " + numberOfBuild + " status: " + statusOfBuild
-    println "\n[$buildName] build $numberOfBuild status: $statusOfBuild"
-    // if we have any failed build set whole run to fail
-    build.setResult(build.result.combine(bld.value.result))*/
+writer.close()
