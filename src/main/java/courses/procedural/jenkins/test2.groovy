@@ -38,8 +38,8 @@ if (build.workspace.isRemote()) {
     channel = build.workspace.channel
 }
 String fp = build.workspace.toString() + "\\" + "report.xml"
-newFile = new hudson.FilePath(channel, fp)
-newFile.write("xyz", result)
+//newFile = new hudson.FilePath(channel, fp)
+//newFile.write("xyz", result)
 
 
 build.workspace.child("file.xml").write(result, "UTF-8")
