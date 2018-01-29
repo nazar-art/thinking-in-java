@@ -1,4 +1,4 @@
-package block_iterator;
+package courses.block_iterator;
 
 import java.util.Iterator;
 import java.util.List;

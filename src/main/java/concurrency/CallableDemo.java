@@ -13,7 +13,7 @@ class TaskWithResult implements Callable<String> {
     }
 
     public String call() {
-        return "result of TaskWithResult " + id;
+        return "result.txt of TaskWithResult " + id;
     }
 }
 

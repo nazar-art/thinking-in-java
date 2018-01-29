@@ -4,27 +4,27 @@ import java.util.Arrays;
 
 class Merger {
     /*public static int[] merge(int[] a, int[] b) { // wrong!
-        int[] result = new int[a.length + b.length];
+        int[] result.txt = new int[a.length + b.length];
         int aIndex = 0;
         int bIndex = 0;
-        while (aIndex + bIndex != result.length) {
+        while (aIndex + bIndex != result.txt.length) {
             if (a[aIndex] < b[bIndex]) {
-                result[aIndex + bIndex] = a[aIndex++];
+                result.txt[aIndex + bIndex] = a[aIndex++];
             } else {
-                result[aIndex + bIndex] = b[bIndex++];
+                result.txt[aIndex + bIndex] = b[bIndex++];
             }
         }
-        return result;
+        return result.txt;
     }*/
 
     public static int[] merge(int[] first, int[] second) {
         int[] result = new int[first.length + second.length];
         int iFirst = 0; // Next element to consider in the first array
         int iSecond = 0; // Next element to consider in the second array
-        int j = 0; // Next open position in result
+        int j = 0; // Next open position in result.txt
 
         // As long as neither iFirst nor iSecond is past the end, move
-        // the smaller element into result
+        // the smaller element into result.txt
         while (iFirst < first.length && iSecond < second.length) {
             if (first[iFirst] < second[iSecond]) {
                 result[j] = first[iFirst];

@@ -25,7 +25,7 @@ public class LoopFib {
      * @return the nth Fibonacci number
      */
     public static BigInteger fib(int n) {
-        if (n <= 2) {
+        if (n <= 1) {
             return new BigInteger("1");
         }
 
@@ -33,7 +33,7 @@ public class LoopFib {
         BigInteger oldValue = new BigInteger("1");
         BigInteger newValue = new BigInteger("1");
 
-        for (int i = 3; i <= n; i++) {
+        for (int i = 2; i <= n; i++) {
             newValue = oldValue.add(olderValue);
             olderValue = oldValue;
             oldValue = newValue;

@@ -19,8 +19,8 @@ public class CachedFibonacci {
     }
 
     private static LoadingCache<BigDecimal, BigDecimal> cachedFibonacci = CacheBuilder.newBuilder()
-            .expireAfterWrite(3, TimeUnit.MINUTES)
-            .maximumSize(500000)
+            .expireAfterWrite(5, TimeUnit.MINUTES)
+            .maximumSize(5000000)
             .concurrencyLevel(5)
 //            .weakKeys()
             .build(new CacheLoader<BigDecimal, BigDecimal>() {
@@ -110,20 +110,25 @@ public class CachedFibonacci {
             long inputNumber = scanner.nextLong();
             if (inputNumber >= 0) {
                 long beginTime = System.nanoTime();
-//                BigDecimal fibo = getIterativeFibonacci(inputNumber);
+                BigDecimal fibo = getIterativeFibonacci(inputNumber);
 //                BigDecimal fibo = getFibonacciDynamic(inputNumber);
 //                BigDecimal fibo = getCachedFibonacciOf(inputNumber);
-                BigDecimal fibo = getGuavaCache(inputNumber);
+//                BigDecimal fibo = getGuavaCache(inputNumber);
 
                 long endTime = System.nanoTime();
                 long delta = endTime - beginTime;
 
                 System.out.printf("F(%d) = %.10s ... computed in %,d ms\n", inputNumber, fibo, delta / 1_000_000);
+                System.out.printf("Number of digits %d\n", getFibosLents(fibo));
             } else {
                 System.err.println("You must enter number > 0");
                 System.out.println("try, enter number again, please:");
                 break;
             }
         }
+    }
+
+    private static int getFibosLents(BigDecimal fibo) {
+        return String.valueOf(fibo).length();
     }
 }
