@@ -66,7 +66,7 @@ public class TableCreator {
                 // Remove trailing comma
                 String tableCreate = createCommand.substring(0, createCommand.length() - 1) + ");";
 
-                // print result
+                // print result.txt
                 System.out.println("Table Creation SQL for " + className + " is :\n" + tableCreate);
             }
         }

@@ -3,6 +3,9 @@ package strings;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+//: strings/JGrep.java
+// A very simple version of the "grep" program.
+// {Args: src/main/java/strings/JGrep.java "\\b[Ssct]\\w+"}
 public class JGrep {
     public static void main(String[] args) throws Exception {
         if (args.length < 2) {

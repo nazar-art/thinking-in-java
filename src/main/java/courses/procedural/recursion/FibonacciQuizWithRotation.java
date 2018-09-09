@@ -4,6 +4,7 @@ public class FibonacciQuizWithRotation {
     public static void main(String[] args) {
         f(5);
     }
+
     public static int f(int x) {
         System.out.print(" " + x);
         if (x == 0) {

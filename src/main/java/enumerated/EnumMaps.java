@@ -12,19 +12,11 @@ interface Commands {
 public class EnumMaps {
 
     public static void main(String[] args) {
-        EnumMap<AlarmPoints, Commands> em = new EnumMap<AlarmPoints, Commands>(
-                AlarmPoints.class);
-        em.put(KITCHEN, new Commands() {
-            public void action() {
-                print("Kitchen fire!");
-            }
-        });
+        Map<AlarmPoints, Commands> em = new EnumMap<>(AlarmPoints.class);
 
-        em.put(BATHROOM, new Commands() {
-            public void action() {
-                print("Bathroom alert!");
-            }
-        });
+        em.put(KITCHEN, () -> print("Kitchen fire!"));
+
+        em.put(BATHROOM, () -> print("Bathroom alert!"));
 
         for (Map.Entry<AlarmPoints, Commands> e : em.entrySet()) {
             printnb(e.getKey() + ": ");
