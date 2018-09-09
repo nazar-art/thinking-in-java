@@ -5,7 +5,7 @@ import courses.procedural.util.PermutationGenerator;
 import java.util.ArrayList;
 
 public class PermutationGeneratorDemo {
-    public static final String WORD = "rum";
+    public static final String WORD = "ABC";
     private static int counter = 1;
 
     public static void main(String[] args) {

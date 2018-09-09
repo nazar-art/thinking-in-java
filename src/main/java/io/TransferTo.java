@@ -1,7 +1,7 @@
 package io;
 
 // Using transferTo() between channels
-// {Args: ./src/io/TransferTo.java ./src/io/TransferTo.txt}
+// {Args: src/main/java/io/TransferTo.java src/main/java/io/TransferTo.txt}
 
 import java.nio.channels.*;
 import java.io.*;
@@ -11,7 +11,7 @@ public class TransferTo {
     public static void main(String[] args) throws Exception {
 
         if (args.length != 2) {
-            System.out.println("arguments: sourcefile destfile");
+            System.err.println("arguments: sourcefile destfile");
             System.exit(1);
         }
 
