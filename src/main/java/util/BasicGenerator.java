@@ -14,7 +14,6 @@ public class BasicGenerator<T> implements Generator<T> {
 
     public T next() {
         try {
-
             // Assumes type is a public class:
             return type.newInstance();
         } catch (Exception e) {
