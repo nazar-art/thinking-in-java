@@ -7,7 +7,6 @@ import java.util.TreeSet;
  * Use RandomGenerator.String to fill a TreeSet, but use alphabetic
  *	ordering. Print the TreeSet to verify the sort order.
  */
-
 public class E09_RandTreeSet {
 
     public static void main(String[] args) {
