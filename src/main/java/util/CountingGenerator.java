@@ -2,7 +2,7 @@
 // Simple generator implementations.
 package util;
 
-import generics.Generator;
+import net.lelyak.generics.Generator;
 
 public class CountingGenerator {
     public static class Boolean implements Generator<java.lang.Boolean> {
