@@ -7,7 +7,8 @@ package concurrency;
 
 // Shows the use of thread priorities.
 
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SimplePriorities implements Runnable {
 
@@ -29,10 +30,10 @@ public class SimplePriorities implements Runnable {
     public void run() {
         Thread.currentThread().setPriority(priority);
         while (true) {
-            // An expensive, interruptable operation:
-            for (int i = 1; i < 100000; i++) {
+            // An expensive, interruptible operation:
+            for (int i = 1; i < 100_000; i++) {
                 d += (Math.PI + Math.E) / (double) i;
-                if (i % 1000 == 0)
+                if (i % 1_000 == 0)
                     Thread.yield();
             }
             System.out.println(this);

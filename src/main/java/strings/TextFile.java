@@ -3,25 +3,28 @@ package strings;
 //Static functions for reading and writing text files as
 //a single string, and treating a file as an ArrayList.
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.TreeSet;
 
-@SuppressWarnings("serial")
+//@SuppressWarnings("serial")
 public class TextFile extends ArrayList<String> {
+
     // Read a file as a single string:
     public static String read(String fileName) {
         StringBuilder sb = new StringBuilder();
         try {
-            BufferedReader in = new BufferedReader(new FileReader(new File(
-                    fileName).getAbsoluteFile()));
-            try {
+            try (BufferedReader in = new BufferedReader(new FileReader(new File(fileName).getAbsoluteFile()))) {
                 String s;
                 while ((s = in.readLine()) != null) {
                     sb.append(s);
                     sb.append("\n");
                 }
-            } finally {
-                in.close();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -31,14 +34,10 @@ public class TextFile extends ArrayList<String> {
 
     // Write a single file in one method call:
     public static void write(String fileName, String text) {
-        try {
-            PrintWriter out = new PrintWriter(
-                    new File(fileName).getAbsoluteFile());
-            try {
-                out.print(text);
-            } finally {
-                out.close();
-            }
+        try (PrintWriter out = new PrintWriter(
+                new File(fileName).getAbsoluteFile())
+        ) {
+            out.print(text);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -59,16 +58,10 @@ public class TextFile extends ArrayList<String> {
     }
 
     public void write(String fileName) {
-        try {
-            PrintWriter out = new PrintWriter(
-                    new File(fileName).getAbsoluteFile());
-            try {
+            try (PrintWriter out = new PrintWriter(new File(fileName).getAbsoluteFile())) {
                 for (String item : this)
                     out.println(item);
-            } finally {
-                out.close();
-            }
-        } catch (IOException e) {
+            } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -80,8 +73,7 @@ public class TextFile extends ArrayList<String> {
         TextFile text = new TextFile("test.txt");
         text.write("test2.txt");
         // Break into unique sorted list of words:
-        TreeSet<String> words = new TreeSet<String>(new TextFile(
-                "hs_err_pid4228.log", "\\W+"));
+        TreeSet<String> words = new TreeSet<>(new TextFile("hs_err_pid4228.log", "\\W+"));
         // Display the capitalized words:
         System.out.println(words.headSet("a"));
     }

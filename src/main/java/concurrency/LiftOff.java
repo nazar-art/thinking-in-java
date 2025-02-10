@@ -17,8 +17,7 @@ public class LiftOff implements Runnable {
     }
 
     public String status() {
-        return "#" + id + "(" + (countDown > 0 ? countDown : "Liftoff!")
-                + "), ";
+        return "#" + id + "(" + (countDown > 0 ? countDown : "Liftoff!") + "), ";
     }
 
     public void run() {
@@ -26,5 +25,14 @@ public class LiftOff implements Runnable {
             System.out.print(status());
             Thread.yield();
         }
+//        System.out.println("\nrun in: " + Thread.currentThread().getName());
+    }
+
+    public static void main(String[] args) {
+        LiftOff launch = new LiftOff();
+//        launch.run();
+
+        Thread thr = new Thread(launch);
+        thr.start();
     }
 } // /:~

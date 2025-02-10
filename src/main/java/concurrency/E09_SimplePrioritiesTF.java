@@ -5,7 +5,9 @@ package concurrency;
  * ThreadFactory sets the priorities of the threads.
  ***********************************************/
 
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 
 class SimplePriorities2 implements Runnable {
 
@@ -18,8 +20,8 @@ class SimplePriorities2 implements Runnable {
 
     public void run() {
         for (; ; ) {
-            // An expensive, interruptable operation:
-            for (int i = 1; i < 100000; i++) {
+            // An expensive, interruptible operation:
+            for (int i = 1; i < 100_000; i++) {
                 d += (Math.PI + Math.E) / (double) i;
                 if (i % 1000 == 0)
                     Thread.yield();

@@ -2,15 +2,15 @@ package courses.procedural.recursion.fibonacci;
 
 import java.util.Scanner;
 
-public class Fibonnaci {
+public class Fibonacci {
 
-    public static long getFibonnaciOf(long n) {
+    public static long getFibonacciOf(long n) {
         if (n == 0) {
             return 1;
         } else if (n == 1) {
             return 1;
         } else {
-            return getFibonnaciOf(n - 2) + getFibonnaciOf(n - 1);
+            return getFibonacciOf(n - 2) + getFibonacciOf(n - 1);
         }
     }
 
@@ -21,7 +21,7 @@ public class Fibonnaci {
             long n = scanner.nextLong();
             if (n >= 0) {
                 long beginTime = System.currentTimeMillis();
-                long fibo = getFibonnaciOf(n);
+                long fibo = getFibonacciOf(n);
                 long endTime = System.currentTimeMillis();
 
                 long delta = endTime - beginTime;
