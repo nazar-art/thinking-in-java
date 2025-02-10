@@ -2,7 +2,7 @@
 // A Map filled with data using a generator object.
 package util;
 
-import generics.Generator;
+import net.lelyak.generics.Generator;
 
 import java.util.*;
 

@@ -3,7 +3,7 @@
 // with a default (no-arg) constructor.
 package util;
 
-import generics.Generator;
+import net.lelyak.generics.Generator;
 
 public class BasicGenerator<T> implements Generator<T> {
     private Class<T> type;
