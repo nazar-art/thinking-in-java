@@ -2,6 +2,10 @@ package net.lelyak.operators;
 
 import static net.lelyak.mindview.util.Print.print;
 
+/****************** Exercise 9 *****************
+ * Display the largest and smallest numbers for
+ * both float and double exponential notation.
+ ***********************************************/
 public class E09_MinMaxExponents {
     public static void main(String[] args) {
         print("Float min value: " + Float.MIN_VALUE);
