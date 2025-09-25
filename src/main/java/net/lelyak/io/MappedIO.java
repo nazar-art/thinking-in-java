@@ -1,17 +1,15 @@
 package net.lelyak.io;
 
-//: net.lelyak.io/MappedIO.java
-
 import java.nio.*;
 import java.nio.channels.*;
 import java.io.*;
 
 public class MappedIO {
-    private static int numOfInts = 4000000;
-    private static int numOfUbuffInts = 200000;
+    private static final int numOfInts = 4000000;
+    private static final int numOfUbuffInts = 200000;
 
     private abstract static class Tester {
-        private String name;
+        private final String name;
 
         public Tester(String name) {
             this.name = name;
@@ -32,11 +30,13 @@ public class MappedIO {
         public abstract void test() throws IOException;
     }
 
-    private static Tester[] tests = {new Tester("Stream Write") {
+    private static final String FILE_PATH = "./src/main/java/net/lelyak/io/temp.tmp";
+
+    private static final Tester[] tests = {new Tester("Stream Write") {
 
         public void test() throws IOException {
             DataOutputStream dos = new DataOutputStream(
-                    new BufferedOutputStream(new FileOutputStream(new File("./src/net.lelyak.io/temp.tmp"))));
+                    new BufferedOutputStream(new FileOutputStream(new File(FILE_PATH))));
             for (int i = 0; i < numOfInts; i++)
                 dos.writeInt(i);
             dos.close();
@@ -44,7 +44,7 @@ public class MappedIO {
     }, new Tester("Mapped Write") {
         public void test() throws IOException {
             @SuppressWarnings("resource")
-            FileChannel fc = new RandomAccessFile("./src/net.lelyak.io/temp.tmp", "rw").getChannel();
+            FileChannel fc = new RandomAccessFile(FILE_PATH, "rw").getChannel();
             IntBuffer ib = fc.map(FileChannel.MapMode.READ_WRITE, 0, fc.size()).asIntBuffer();
             for (int i = 0; i < numOfInts; i++)
                 ib.put(i);
@@ -52,7 +52,7 @@ public class MappedIO {
         }
     }, new Tester("Stream Read") {
         public void test() throws IOException {
-            DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream("./src/net.lelyak.io/temp.tmp")));
+            DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(FILE_PATH)));
             for (int i = 0; i < numOfInts; i++)
                 dis.readInt();
             dis.close();
@@ -60,7 +60,7 @@ public class MappedIO {
     }, new Tester("Mapped Read") {
         public void test() throws IOException {
             @SuppressWarnings("resource")
-            FileChannel fc = new FileInputStream(new File("./src/net.lelyak.io/temp.tmp")).getChannel();
+            FileChannel fc = new FileInputStream(new File(FILE_PATH)).getChannel();
             IntBuffer ib = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size()).asIntBuffer();
             while (ib.hasRemaining())
                 ib.get();
@@ -68,7 +68,7 @@ public class MappedIO {
         }
     }, new Tester("Stream Read/Write") {
         public void test() throws IOException {
-            RandomAccessFile raf = new RandomAccessFile(new File("./src/net.lelyak.io/temp.tmp"), "rw");
+            RandomAccessFile raf = new RandomAccessFile(new File(FILE_PATH), "rw");
             raf.writeInt(1);
             for (int i = 0; i < numOfUbuffInts; i++) {
                 raf.seek(raf.length() - 4);
@@ -79,7 +79,7 @@ public class MappedIO {
     }, new Tester("Mapped Read/Write") {
         public void test() throws IOException {
             @SuppressWarnings("resource")
-            FileChannel fc = new RandomAccessFile(new File("./src/net.lelyak.io/temp.tmp"), "rw")
+            FileChannel fc = new RandomAccessFile(new File(FILE_PATH), "rw")
                     .getChannel();
             IntBuffer ib = fc.map(FileChannel.MapMode.READ_WRITE, 0, fc.size())
                     .asIntBuffer();
