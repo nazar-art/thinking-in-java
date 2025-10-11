@@ -29,8 +29,8 @@ final class StringComparator {
         int lengthSecond = second.length();
         int lengthLimit = Math.min(lengthFirst, lengthSecond);
 
-        char arrOne[] = first.toCharArray();
-        char arrTwo[] = second.toCharArray();
+        char[] arrOne = first.toCharArray();
+        char[] arrTwo = second.toCharArray();
 
         for (int i = 0; i < lengthLimit; i++) {
             char ch1 = arrOne[i];
@@ -50,7 +50,6 @@ public class StringComparatorTest {
         String str1 = "1test1";
         String str2 = "test2dd";
         String str3 = "1test1";
-
 
         int result1 = compareByOleander(str1, str2);
         int result2 = compareByOleander(str1, str3);

@@ -1,18 +1,23 @@
 package net.lelyak.concurrency;
 
-//: net.lelyak.concurrency/PriorityBlockingQueueDemo.java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
-import java.util.concurrent.*;
-import java.util.*;
-
-import static net.lelyak.mindview.util.Print.*;
+import static net.lelyak.mindview.util.Print.print;
+import static net.lelyak.mindview.util.Print.printnb;
 
 class PrioritizedTask implements Runnable, Comparable<PrioritizedTask> {
-    private Random rand = new Random(47);
+    protected static List<PrioritizedTask> sequence = new ArrayList<>();
     private static int counter = 0;
+    private final Random rand = new Random(47);
     private final int id = counter++;
     private final int priority;
-    protected static List<PrioritizedTask> sequence = new ArrayList<PrioritizedTask>();
 
     public PrioritizedTask(int priority) {
         this.priority = priority;
@@ -20,7 +25,7 @@ class PrioritizedTask implements Runnable, Comparable<PrioritizedTask> {
     }
 
     public int compareTo(PrioritizedTask arg) {
-        return priority < arg.priority ? 1 : (priority > arg.priority ? -1 : 0);
+        return Integer.compare(arg.priority, priority);
     }
 
     public void run() {
@@ -41,7 +46,7 @@ class PrioritizedTask implements Runnable, Comparable<PrioritizedTask> {
     }
 
     public static class EndSentinel extends PrioritizedTask {
-        private ExecutorService exec;
+        private final ExecutorService exec;
 
         public EndSentinel(ExecutorService e) {
             super(-1); // Lowest priority in this program
@@ -63,9 +68,9 @@ class PrioritizedTask implements Runnable, Comparable<PrioritizedTask> {
 }
 
 class PrioritizedTaskProducer implements Runnable {
-    private Random rand = new Random(47);
-    private Queue<Runnable> queue;
-    private ExecutorService exec;
+    private final Random rand = new Random(47);
+    private final Queue<Runnable> queue;
+    private final ExecutorService exec;
 
     public PrioritizedTaskProducer(Queue<Runnable> q, ExecutorService e) {
         queue = q;
@@ -98,7 +103,7 @@ class PrioritizedTaskProducer implements Runnable {
 }
 
 class PrioritizedTaskConsumer implements Runnable {
-    private PriorityBlockingQueue<Runnable> q;
+    private final PriorityBlockingQueue<Runnable> q;
 
     public PrioritizedTaskConsumer(PriorityBlockingQueue<Runnable> q) {
         this.q = q;
@@ -119,7 +124,7 @@ class PrioritizedTaskConsumer implements Runnable {
 public class PriorityBlockingQueueDemo {
     public static void main(String[] args) throws Exception {
         ExecutorService exec = Executors.newCachedThreadPool();
-        PriorityBlockingQueue<Runnable> queue = new PriorityBlockingQueue<Runnable>();
+        PriorityBlockingQueue<Runnable> queue = new PriorityBlockingQueue<>();
         exec.execute(new PrioritizedTaskProducer(queue, exec));
         exec.execute(new PrioritizedTaskConsumer(queue));
     }

@@ -1,16 +1,17 @@
 package net.lelyak.concurrency;
 
-//: net.lelyak.concurrency/SerialNumberChecker.java
 // Operations that may seem safe are not,
 // when threads are present.
 // {Args: 4}
 
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 // Reuses storage so we don't run out of memory:
 class CircularSet {
-    private int[] array;
-    private int len;
+    private final int[] array;
+    private final int len;
     private int index = 0;
 
     public CircularSet(int size) {
@@ -38,8 +39,19 @@ class CircularSet {
 
 public class SerialNumberChecker {
     private static final int SIZE = 10;
-    private static CircularSet serials = new CircularSet(1000);
-    private static ExecutorService exec = Executors.newCachedThreadPool();
+    private static final CircularSet serials = new CircularSet(1000);
+    private static final ExecutorService exec = Executors.newCachedThreadPool();
+
+    public static void main(String[] args) throws Exception {
+        for (int i = 0; i < SIZE; i++)
+            exec.execute(new SerialChecker());
+        // Stop after n seconds if there's an argument:
+        if (args.length > 0) {
+            TimeUnit.SECONDS.sleep(Integer.parseInt(args[0]));
+            System.out.println("No duplicates detected");
+            System.exit(0);
+        }
+    }
 
     static class SerialChecker implements Runnable {
         public void run() {
@@ -51,17 +63,6 @@ public class SerialNumberChecker {
                 }
                 serials.add(serial);
             }
-        }
-    }
-
-    public static void main(String[] args) throws Exception {
-        for (int i = 0; i < SIZE; i++)
-            exec.execute(new SerialChecker());
-        // Stop after n seconds if there's an argument:
-        if (args.length > 0) {
-            TimeUnit.SECONDS.sleep(new Integer(args[0]));
-            System.out.println("No duplicates detected");
-            System.exit(0);
         }
     }
 } 

@@ -7,7 +7,6 @@ package net.lelyak.arrays;
  *	ordinary aggregate array initialization works, and where dynamic aggregate initialization is
  *	redundant.
  */
-
 class BerylliumSphere {
     private static long counter;
     private final long id = counter++;
@@ -21,8 +20,8 @@ public class E01 {
 
     private static void call(BerylliumSphere[] berylliumSphere) {
         StringBuilder builder = new StringBuilder(1024);
-        for (int i = 0; i < berylliumSphere.length; i++) {
-            builder.append(berylliumSphere[i] + " ");
+        for (BerylliumSphere sphere : berylliumSphere) {
+            builder.append(sphere).append(" ");
         }
         builder.delete(berylliumSphere.length - 1, berylliumSphere.length);
         System.out.println(builder);

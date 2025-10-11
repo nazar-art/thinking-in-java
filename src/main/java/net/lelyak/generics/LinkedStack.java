@@ -5,8 +5,8 @@ package net.lelyak.generics;
  code in LinkedStack.java to show that an inner class has access to the generic type
  parameters of its outer class.
  */
-
 public class LinkedStack<T> {
+
     private class Node {
         T item;
         Node next;
@@ -40,7 +40,7 @@ public class LinkedStack<T> {
     }
 
     public static void main(String[] args) {
-        LinkedStack<String> lss = new LinkedStack<String>();
+        LinkedStack<String> lss = new LinkedStack<>();
         for (String s : "Phasers on stun!".split(" "))
             lss.push(s);
         String s;

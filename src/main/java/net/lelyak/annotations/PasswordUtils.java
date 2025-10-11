@@ -1,8 +1,6 @@
 package net.lelyak.annotations;
 
-//: net.lelyak.annotations/PasswordUtils.java
-
-import java.util.*;
+import java.util.List;
 
 public class PasswordUtils {
 

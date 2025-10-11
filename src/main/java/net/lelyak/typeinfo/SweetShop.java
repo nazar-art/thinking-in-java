@@ -3,7 +3,7 @@ package net.lelyak.typeinfo;
 //: net.lelyak.typeinfo/SweetShop.java
 // Examination of the way the class loader works.
 
-import static util.Print.*;
+import static util.Print.print;
 
 class Candy {
     static {

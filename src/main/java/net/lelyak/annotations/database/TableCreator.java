@@ -26,13 +26,13 @@ public class TableCreator {
             String tableName = dbTable.name();
 
             // If the name is empty, use the Class name:
-            if (tableName.length() < 1)
+            if (tableName.isEmpty())
                 tableName = cl.getName().toUpperCase();
 
-            List<String> columnDefs = new ArrayList<String>();
+            List<String> columnDefs = new ArrayList<>();
 
             for (Field field : cl.getDeclaredFields()) {
-                String columnName = null;
+                String columnName;
                 Annotation[] anns = field.getDeclaredAnnotations();
                 if (anns.length < 1)
                     continue; // Not a db table column
@@ -40,7 +40,7 @@ public class TableCreator {
                     SQLInteger sInt = (SQLInteger) anns[0];
 
                     // Use field name if name not specified
-                    if (sInt.name().length() < 1)
+                    if (sInt.name().isEmpty())
                         columnName = field.getName().toUpperCase();
                     else
                         columnName = sInt.name();
@@ -50,7 +50,7 @@ public class TableCreator {
                 if (anns[0] instanceof SQLString) {
                     SQLString sString = (SQLString) anns[0];
                     // Use field name if name not specified.
-                    if (sString.name().length() < 1)
+                    if (sString.name().isEmpty())
                         columnName = field.getName().toUpperCase();
                     else
                         columnName = sString.name();
@@ -61,7 +61,7 @@ public class TableCreator {
                 StringBuilder createCommand = new StringBuilder("CREATE TABLE " + tableName + "(");
 
                 for (String columnDef : columnDefs)
-                    createCommand.append("\n    " + columnDef + ",");
+                    createCommand.append("\n    ").append(columnDef).append(",");
 
                 // Remove trailing comma
                 String tableCreate = createCommand.substring(0, createCommand.length() - 1) + ");";

@@ -5,13 +5,15 @@ import java.util.regex.Pattern;
 
 //: net.lelyak.strings/JGrep.java
 // A very simple version of the "grep" program.
-// {Args: src/main/java/net.lelyak.strings/JGrep.java "\\b[Ssct]\\w+"}
+// {Args: src/main/java/net/lelyak/strings/JGrep.java "\\b[Ssct]\\w+"}
 public class JGrep {
     public static void main(String[] args) throws Exception {
+
         if (args.length < 2) {
             System.out.println("Usage: java JGrep file regex");
             System.exit(0);
         }
+
         Pattern p = Pattern.compile(args[1]);
         // Iterate through the lines of the input file:
         int index = 0;

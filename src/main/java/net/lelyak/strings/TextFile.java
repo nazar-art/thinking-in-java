@@ -48,7 +48,7 @@ public class TextFile extends ArrayList<String> {
         super(Arrays.asList(read(fileName).split(splitter)));
         // Regular expression split() often leaves an empty
         // String at the first position:
-        if (get(0).equals(""))
+        if (get(0).isEmpty())
             remove(0);
     }
 

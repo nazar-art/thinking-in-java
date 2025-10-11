@@ -5,23 +5,26 @@
  ***********************************************/
 package net.lelyak.io;
 
-import java.io.*;
-import java.util.*;
+import net.lelyak.mindview.util.BinaryFile;
 
-import net.lelyak.mindview.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class E19_BytesInfo {
 
     public static void main(String[] args) throws IOException {
 
-        Map<Byte, Integer> bytesStat = new HashMap<Byte, Integer>();
-
-        for (Byte bt : BinaryFile.read("./bin/net.lelyak.io/E19_BytesInfo.class")) {
-            Integer freq = bytesStat.get(bt);
-            bytesStat.put(bt, freq == null ? 1 : freq + 1);
+        Map<Byte, Integer> bytesStat = new HashMap<>();
+        for (Byte bt : BinaryFile.read("./target/classes/net/lelyak/io/E19_BytesInfo.class")) {
+            bytesStat.compute(bt, (k, freq) -> freq == null ? 1 : freq + 1);
         }
 
-        List<Byte> keys = new ArrayList<Byte>(bytesStat.keySet());
+        List<Byte> keys = new ArrayList<>(bytesStat.keySet());
         Collections.sort(keys);
         for (Byte key : keys)
             System.out.println(key + " => " + bytesStat.get(key));

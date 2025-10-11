@@ -36,20 +36,15 @@ import java.util.List;
 @DBTable(name = "MEMBER")
 class Members {
 
+    static int memberCount;
     @SQLString(30)
     String firstName;
-
     @SQLString(50)
     String lastName;
-
     @SQLInteger
     Integer age;
-
     @SQLCharacter(value = 15, constraints = @Constraints(primaryKey = true))
     String handle;
-
-    static int memberCount;
-
     @SQLBoolean
     Boolean isVIP;
 
@@ -99,13 +94,13 @@ public class E01_TableCreator {
             String tableName = dbTable.name();
 
             // If the name is empty, use the Class name:
-            if (tableName.length() < 1)
+            if (tableName.isEmpty())
                 tableName = cl.getName().toUpperCase();
 
             List<String> columnDefs = new ArrayList<String>();
 
             for (Field field : cl.getDeclaredFields()) {
-                String columnName = null;
+                String columnName;
                 Annotation[] anns = field.getDeclaredAnnotations();
 
                 if (anns.length < 1)
@@ -115,52 +110,53 @@ public class E01_TableCreator {
                     SQLInteger sInt = (SQLInteger) anns[0];
 
                     // Use field name if name not specified
-                    if (sInt.name().length() < 1)
+                    if (sInt.name().isEmpty())
                         columnName = field.getName().toUpperCase();
                     else
                         columnName = sInt.name();
 
                     columnDefs.add(columnName + " INT"
-                            + getConstraints(sInt.constraints()));
+                        + getConstraints(sInt.constraints()));
                 } else if (anns[0] instanceof SQLString) {
 
                     SQLString sString = (SQLString) anns[0];
 
                     // Use field name if name not specified.
-                    if (sString.name().length() < 1)
+                    if (sString.name().isEmpty())
                         columnName = field.getName().toUpperCase();
                     else
                         columnName = sString.name();
                     columnDefs.add(columnName + " NVARCHAR(" + sString.value()
-                            + ")" + getConstraints(sString.constraints()));
+                        + ")" + getConstraints(sString.constraints()));
+
                 } else if (anns[0] instanceof SQLBoolean) {
 
                     SQLBoolean sBol = (SQLBoolean) anns[0];
 
                     // Use field name if name not specified
-                    if (sBol.name().length() < 1)
+                    if (sBol.name().isEmpty())
                         columnName = field.getName().toUpperCase();
                     else
                         columnName = sBol.name();
-                    columnDefs.add(columnName + " BOOLEAN"
-                            + getConstraints(sBol.constraints()));
+                    columnDefs.add(columnName + " BOOLEAN" + getConstraints(sBol.constraints()));
+
                 } else if (anns[0] instanceof SQLCharacter) {
 
                     SQLCharacter sChar = (SQLCharacter) anns[0];
 
                     // Use field name if name not specified.
-                    if (sChar.name().length() < 1)
+                    if (sChar.name().isEmpty())
                         columnName = field.getName().toUpperCase();
                     else
                         columnName = sChar.name();
                     columnDefs.add(columnName + " CHARACTER(" + sChar.value()
-                            + ")" + getConstraints(sChar.constraints()));
+                        + ")" + getConstraints(sChar.constraints()));
                 }
 
                 StringBuilder createCommand = new StringBuilder("CREATE TABLE " + tableName + "(");
 
                 for (String columnDef : columnDefs)
-                    createCommand.append("\n		" + columnDef + ",");
+                    createCommand.append("\n		").append(columnDef).append(",");
 
                 // Remove trailing comma
                 String tableCreate = createCommand.substring(0, createCommand.length() - 1) + ");";
